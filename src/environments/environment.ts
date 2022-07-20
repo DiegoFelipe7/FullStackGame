@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBnTvqtlb6Upt4SbE5M7xpBuhMW8lfk7uM",
-    authDomain: "juegodecartas-b0091.firebaseapp.com",
-    projectId: "juegodecartas-b0091",
-    storageBucket: "juegodecartas-b0091.appspot.com",
-    messagingSenderId: "659461209410",
-    appId: "1:659461209410:web:2b35e70a4dc89a2a3f9cdb",
-    measurementId: "G-VT5DRHZTY6"
+    apiKey: "AIzaSyAj4eYykHDpOyGYxYLy0GVeEBRvYI1oEPk",
+    authDomain: "juegocartas-a20e6.firebaseapp.com",
+    projectId: "juegocartas-a20e6",
+    storageBucket: "juegocartas-a20e6.appspot.com",
+    messagingSenderId: "161799294546",
+    appId: "1:161799294546:web:d1dd19d4a3daa8956a198b",
+    measurementId: "G-LHNBDK6RY1"
   }
 };
 
