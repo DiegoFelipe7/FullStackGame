@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row justify-content-center" style="margin-top: 200px">
+    <div class="col-4">
+      <img src="../../../assets/img/logo.jpg" class="w-100 rounded-2" />
+    </div>
+    <div class="col-4 bg-white">
+      <form class="w-100 p-5" autocomplete="off">
+        <h1 class="fw-bold text-black text-center mt-5">Inicia sesion</h1>
+        <div class="mt-2">
+          <label class="form-label fw-bold"> Correo </label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            #email
+            required
+          />
+        </div>
+
+        <div class="mt-2">
+          <label class="form-label fw-bold"> Contraseña </label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            #password
+            required
+          />
+        </div>
+        <div class="mt-4">
+          <button class="btn btn-dark w-100 fw-bold">
+            <i class="bi bi-box-arrow-in-right"></i> {{ " " }}Iniciar sesion
+          </button>
+        </div>
+        <div class="mt-2">
+          <a
+            class="btn btn-light text-black w-100 fw-bold"
+            routerLink="/singUp"
+          >
+            <i class="bi bi-person-plus"></i> {{ " " }}Registrarse
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
