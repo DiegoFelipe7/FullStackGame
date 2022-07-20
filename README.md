@@ -13,25 +13,25 @@ las tarjetas. Cada jugador apuesta basado en sus bajara de tarjetas y gana la pa
 tarjeta que tenga mayor XP.
 
 Instrucciones:
-● El sistema es fácil, simplemente se reparte las tarjetas a cada jugador de forma
+- El sistema es fácil, simplemente se reparte las tarjetas a cada jugador de forma
 aleatoria y se tiene diferentes rondas, cada ronda los jugadores colocan una tarjeta
 de forma tal que los demás jugadores no sepan cuál es.
-● Luego que todos los jugadores pongan su tarjeta apostada, la tarjeta que sume más
+- Luego que todos los jugadores pongan su tarjeta apostada, la tarjeta que sume más
 puntos gana, significa que el jugador que tenga la mejor tarjeta se lleva las demás
 tarjetas que están en el tablero (es como un sistema de apuestas convencional).
-● El jugador tiene un minuto para poner una tarjeta en el tablero, de lo contrario el
+- El jugador tiene un minuto para poner una tarjeta en el tablero, de lo contrario el
 sistema de forma automática selecciona una tarjeta del mazo de tarjetas del jugador
 que tiene el turno.
-● Después de que el último jugador apueste la tarjeta, se inicia el proceso de validación
+- Después de que el último jugador apueste la tarjeta, se inicia el proceso de validación
 y asignación de ganador de ronda, quitando y poniendo tarjetas en los mazos de los
 jugadores.
-● El juego finaliza cuando los jugadores quedan sin tarjetas y solo uno de ellos queda
+- El juego finaliza cuando los jugadores quedan sin tarjetas y solo uno de ellos queda
 vivo en el juego.
-● El jugador que adquiere las tarjetas de los demás jugadores puede usar esas
+- El jugador que adquiere las tarjetas de los demás jugadores puede usar esas
 mismas tarjetas durante el juego (es decir la puede apostar).
-● El juego se reinicia en cualquier momento o finalizando el juego, encontrando el
+- El juego se reinicia en cualquier momento o finalizando el juego, encontrando el
 ganador, si un jugador decide retirarse, las tarjetas entran al mazo principal.
-● Los puntos se acumulan por jugador, teniendo un puntaje gracias a una cuenta que
+- Los puntos se acumulan por jugador, teniendo un puntaje gracias a una cuenta que
 tenga el usuario al inicio de sesión.
 
 Funcionalidades
