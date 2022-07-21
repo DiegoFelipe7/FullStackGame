@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { SingInComponent } from './auth/sing-in/sing-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { CardHerosComponent } from './dashboard/card-heros/card-heros.component';
 
 
 
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
     AppComponent,
     SingInComponent,
     SignUpComponent,
-    DashboardComponent
+    DashboardComponent,
+    CardHerosComponent,
   ],
   imports: [
     BrowserModule,

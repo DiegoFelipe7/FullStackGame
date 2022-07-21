@@ -1,8 +1,56 @@
-<div class="row">
-  <div class="col-3 bg-dark vh-100 position-absolute">
-    <h1 class="text-center fw-bold text-white mt-5">Bienvenido Diego</h1>
+<div class="row w-100">
+  <div
+    class="col-2 vh-100 justify-content-center align-content-center"
+    style="background-color: #1c2c4c"
+  >
+    <h1 class="text-center fw-bold mt-5 text-white">Cartas</h1>
+    <h2 class="text-center fw-bold mt-1 text-white">Marvel</h2>
+    <div class="d-flex flex-column mb-3">
+      <div class="p-2 mt-5 text-center">
+        <a
+          class="w-50 text-decoration-none fw-bold text-secondary fs-3 text-white"
+          routerLink="/hola"
+          ><i class="bi bi-house-door-fill"></i> Inicio</a
+        >
+      </div>
+      <div class="p-2 text-center mt-2">
+        <a
+          class="w-50 text-decoration-none fw-bold text-secondary fs-3 text-white"
+          routerLink="/hola"
+          ><i class="bi bi-person-badge-fill"></i> Cartas</a
+        >
+      </div>
+      <div class="p-2 text-center mt-4">
+        <a
+          class="w-50 text-decoration-none fw-bold text-secondary fs-3 text-white"
+          routerLink="/hola"
+          ><i class="bi bi-house-door-fill"></i> Home</a
+        >
+      </div>
+    </div>
   </div>
-  <div class="col-9 bg-white">
-    <div class="row"></div>
+
+  <div class="col-10">
+    <div class="col-12 bg-light shadow" style="height: 80px">
+      <div class="row justify-content-end">
+        <div class="col-8">
+          <h1 class="fw-bold" style="margin-left: 20px">Inicio</h1>
+        </div>
+        <div class="col-4 text-center">
+          <button
+            class="btn btn-danger p-2 mt-2 text-white fw-bold w-25"
+            (click)="salida()"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-12 bg-white mt-2 shadow rounded-2 p-5"
+      style="height: 850px"
+    >
+      <app-card-heros></app-card-heros>
+    </div>
   </div>
 </div>
