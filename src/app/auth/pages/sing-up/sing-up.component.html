@@ -5,7 +5,18 @@
     </div>
     <div class="col-4 bg-white">
       <form class="w-100 p-5" autocomplete="off">
-        <h1 class="fw-bold text-black text-center mt-5">Inicia sesion</h1>
+        <h1 class="fw-bold text-black text-center mt-5">Registrase</h1>
+        <div class="mt-2">
+          <label class="form-label fw-bold"> Nombre </label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="name"
+            #name
+            required
+          />
+        </div>
         <div class="mt-2">
           <label class="form-label fw-bold"> Correo </label>
           <input
@@ -29,31 +40,24 @@
             required
           />
         </div>
-        <div class="mt-4">
+        <div class="mt-2">
           <button
             class="btn btn-dark w-100 fw-bold"
             type="button"
-            (click)="authService.SignIn(email.value, password.value)"
+            (click)="
+              authService.SignUp(name.value, email.value, password.value)
+            "
           >
-            <i class="bi bi-box-arrow-in-right"></i> {{ " " }}Iniciar sesion
+            <i class="bi bi-person-plus"></i>{{ " " }}Registrarse
           </button>
         </div>
         <div class="mt-2">
           <a
             class="btn btn-light text-black w-100 fw-bold"
-            routerLink="/singUp"
+            routerLink="/auth/SingIn"
           >
-            <i class="bi bi-person-plus"></i> {{ " " }}Registrarse
+            <i class="bi bi-person-plus"></i> {{ " " }}Volver
           </a>
-        </div>
-
-        <div class="mt-2">
-          <button
-            class="btn btn-light text-black w-100 fw-bold"
-            (click)="authService.SingInGoogle()"
-          >
-            <i class="bi bi-google"></i>{{ " " }}Registro con google
-          </button>
         </div>
       </form>
     </div>

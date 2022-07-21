@@ -15,6 +15,8 @@ import firebase from 'firebase/compat/app';
 export class AuthService {
   User: boolean | undefined;
   private userData: any = {};
+
+
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore, private router: Router) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {

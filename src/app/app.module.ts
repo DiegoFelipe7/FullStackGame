@@ -6,29 +6,20 @@ import { HttpClientModule } from '@angular/common/http';
 //
 import { AngularFireModule } from '@angular/fire/compat';
 //module
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routes/app-routing.module';
 //Components
 import { AppComponent } from './app.component';
-import { SingInComponent } from './auth/sing-in/sing-in.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-import { CardHerosComponent } from './dashboard/card-heros/card-heros.component';
-
-
-
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [
     AppComponent,
-    SingInComponent,
-    SignUpComponent,
-    DashboardComponent,
-    CardHerosComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule
+    HttpClientModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
