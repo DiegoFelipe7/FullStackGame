@@ -10,6 +10,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
 //Components
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,9 +18,11 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule,
+    DashboardModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule,
-    AuthModule
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

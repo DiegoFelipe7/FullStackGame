@@ -33,7 +33,7 @@
           <button
             class="btn btn-dark w-100 fw-bold"
             type="button"
-            (click)="authService.SignIn(email.value, password.value)"
+            (click)="login(email.value, password.value)"
           >
             <i class="bi bi-box-arrow-in-right"></i> {{ " " }}Iniciar sesion
           </button>
@@ -41,7 +41,7 @@
         <div class="mt-2">
           <a
             class="btn btn-light text-black w-100 fw-bold"
-            routerLink="/auth/SingUp"
+            routerLink="/SingUp"
           >
             <i class="bi bi-person-plus"></i> {{ " " }}Registrarse
           </a>
@@ -50,7 +50,7 @@
         <div class="mt-2">
           <button
             class="btn btn-light text-black w-100 fw-bold"
-            (click)="authService.SingInGoogle()"
+            (click)="registerGoogle()"
           >
             <i class="bi bi-google"></i>{{ " " }}Registro con google
           </button>

@@ -5,7 +5,7 @@ import { SingUpComponent } from './pages/sing-up/sing-up.component';
 
 const routes: Routes = [
   {
-    path: "auth", children:
+    path: "", children:
       [
 
         { path: "SignIn", component: SingInComponent },
