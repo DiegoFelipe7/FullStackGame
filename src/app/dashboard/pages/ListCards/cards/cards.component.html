@@ -1,0 +1,54 @@
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div
+        class="modal-header text-center text-white"
+        style="background-color: #101625"
+      >
+        <h5 class="modal-title text-white" id="exampleModalLabel">
+          {{ cardsHero.nameOfCard }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close bg-white text-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-2">
+          <label>Nombre</label>
+          <input
+            class="form-control"
+            id="nameOfCard"
+            name="nameOfCard"
+            [(ngModel)]="cardsHero.nameOfCard"
+          />
+        </div>
+        <div class="mt-2">
+          <label>Descripcion</label>
+          <textarea class="form-control" [(ngModel)]="cardsHero.features">
+          </textarea>
+        </div>
+        <div>
+          <label>Poder</label>
+          <input class="form-control" [(ngModel)]="cardsHero.power" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <button type="button" (click)="UpdateCard()" class="btn btn-primary">
+            Modificar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

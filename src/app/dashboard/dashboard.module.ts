@@ -1,19 +1,28 @@
+//angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardHerosComponent } from './pages/card-heros/card-heros.component';
+import { FormsModule } from '@angular/forms';
+//componentes
+import { CardsHerosComponent } from './pages/ListCards/cards-heros/cards-heros.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CardsComponent } from './pages/ListCards/cards/cards.component';
+//modulos 
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
 @NgModule({
   declarations: [
-    CardHerosComponent,
-    DashboardComponent
+    DashboardComponent,
+    CardsHerosComponent,
+    CardsComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class DashboardModule { }

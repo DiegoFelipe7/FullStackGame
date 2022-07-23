@@ -5,12 +5,12 @@ import { SingUpComponent } from './pages/sing-up/sing-up.component';
 
 const routes: Routes = [
   {
-    path: "", children:
+    path: '', children:
       [
 
-        { path: "SignIn", component: SingInComponent },
-        { path: "SingUp", component: SingUpComponent },
-        { path: "**", redirectTo: "SignIn" }
+        { path: 'SignIn', component: SingInComponent },
+        { path: 'SingUp', component: SingUpComponent },
+        { path: '**', redirectTo: 'SignIn' }
       ]
   }
 ];

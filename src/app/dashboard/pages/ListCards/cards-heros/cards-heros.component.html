@@ -1,0 +1,40 @@
+<div class="row">
+  <div
+    class="col-3 mt-2"
+    *ngFor="
+      let card of cards | paginate: { itemsPerPage: 8, currentPage: page }
+    "
+  >
+    <div class="card bg-dark" style="width: 14rem">
+      <h4 class="text-center text-white fw-bold">{{ card.nameOfCard }}</h4>
+      <div class="card-body">
+        <img src="{{ card.urlImage }}" class="w-100 h-100" />
+      </div>
+      <div class="card-footer text-center">
+        <button
+          class="text-white bg-dark border rounded"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="getCardId(card.cardId)"
+        >
+          <i class="bi bi-eye-fill"></i>
+        </button>
+        <button
+          class="text-white bg-dark border rounded"
+          (click)="removeCards(card.cardId)"
+          style="margin-left: 10px"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+    <app-cards [cardsHero]="cardId"></app-cards>
+  </div>
+</div>
+<div class="row justify-content-center position-absolute mt-2">
+  <pagination-controls
+    (pageChange)="page = $event"
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+  ></pagination-controls>
+</div>

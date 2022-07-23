@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardHerosComponent } from './pages/card-heros/card-heros.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CardsHerosComponent } from './pages/ListCards/cards-heros/cards-heros.component';
 const routes: Routes = [
   {
-    path: "Menu", component: DashboardComponent,
+    path: '', component: DashboardComponent,
     children:
       [
-
-        { path: "Cards", component: CardHerosComponent },
-        { path: "**", redirectTo: "Cards" }
+        { path: 'Cards', component: CardsHerosComponent },
+        { path: '**', redirectTo: 'Cards' }
       ]
   }
 

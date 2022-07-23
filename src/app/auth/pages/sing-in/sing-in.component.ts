@@ -20,7 +20,7 @@ export class SingInComponent implements OnInit {
       Swal.fire('Campos obligatorios');
       return;
     }
-    this.authService.SignIn(email, password).then(() => this.router.navigate(["/dashboard"]).catch(() => Swal.fire('Revisa tu correo o contraseña'))
+    this.authService.SignIn(email, password).then(() => this.router.navigate(["/Dashboard/Cards"]).catch(() => Swal.fire('Revisa tu correo o contraseña'))
     );
   }
 
