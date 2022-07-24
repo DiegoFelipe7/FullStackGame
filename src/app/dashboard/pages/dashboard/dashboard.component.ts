@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { userLogin } from 'src/app/interface/UserLogin';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
 
@@ -8,12 +9,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  private user: any | undefined;
-  constructor(private authService: AuthService) { }
+  user: userLogin = {
+    id: `${localStorage.getItem("id")}`,
+    email: `${localStorage.getItem("email")}`
+  }
+  constructor(private authService: AuthService) {
+
+
+  }
 
   ngOnInit(): void {
-    this.user = localStorage.getItem("user")
-    console.log(this.user)
   }
 
   salida() {

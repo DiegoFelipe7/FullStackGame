@@ -1,8 +1,13 @@
 export interface Card {
-    cardId: String,
-    nameOfCard: String,
-    features: String,
-    urlImage: String,
-    power: Number
+    cardId: string;
+    nameOfCard: string;
+    features: string;
+    urlImage: string;
+    power: number;
 
 }
+
+
+
+
+

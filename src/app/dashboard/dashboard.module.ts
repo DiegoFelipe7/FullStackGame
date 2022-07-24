@@ -11,6 +11,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GameComponent } from './pages/game/game/game.component';
 import { GameBoardComponent } from './pages/game/game-board/game-board.component';
+import { CreateGameComponent } from './pages/game/create-game/create-game.component';
+import { SidebarComponent } from './pages/shared/sidebar/sidebar.component';
 
 
 
@@ -20,7 +22,9 @@ import { GameBoardComponent } from './pages/game/game-board/game-board.component
     CardsHerosComponent,
     CardsComponent,
     GameComponent,
-    GameBoardComponent
+    GameBoardComponent,
+    CreateGameComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,

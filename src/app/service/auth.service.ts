@@ -7,21 +7,19 @@ import {
 import { Users } from '../interface/Users';
 import Swal from 'sweetalert2';
 import firebase from 'firebase/compat/app';
+import { userLogin } from '../interface/UserLogin';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   User: boolean | undefined;
-  private userData: any = {};
-
-
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        localStorage.setItem('id', JSON.stringify(user.uid));
+        localStorage.setItem('email', JSON.stringify(user.email));
+
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -29,14 +27,6 @@ export class AuthService {
     });
 
   }
-
-  /**
-   * metodo para la info del usuario logeado
-   */
-  getAuth(): void {
-    return { ...this.userData }
-  }
-
 
 
   /**
@@ -126,7 +116,9 @@ export class AuthService {
    * @returns usuario logeado
    */
   getUserLogged() {
-    return this.afAuth.authState;
+    this.afAuth.authState.subscribe((user) =>
+      console.log(user)
+    );
   }
 
   logout() {
