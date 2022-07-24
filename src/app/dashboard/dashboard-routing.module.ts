@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '', component: DashboardComponent,
     children:
-      [{ path: 'Game', component: GameBoardComponent },
+      [{ path: 'Game', component: GameComponent },
       { path: 'Cards', component: CardsHerosComponent },
       { path: '**', redirectTo: 'Game' }
       ]
