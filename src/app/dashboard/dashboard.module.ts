@@ -9,6 +9,8 @@ import { CardsComponent } from './pages/ListCards/cards/cards.component';
 //modulos 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { GameComponent } from './pages/game/game/game.component';
+import { GameBoardComponent } from './pages/game/game-board/game-board.component';
 
 
 
@@ -16,7 +18,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
   declarations: [
     DashboardComponent,
     CardsHerosComponent,
-    CardsComponent
+    CardsComponent,
+    GameComponent,
+    GameBoardComponent
   ],
   imports: [
     CommonModule,

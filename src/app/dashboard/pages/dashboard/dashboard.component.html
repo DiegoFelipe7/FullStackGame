@@ -9,14 +9,14 @@
       <div class="p-2 mt-5 text-center">
         <a
           class="w-50 text-decoration-none fw-bold text-secondary fs-3 text-white"
-          routerLink="/hola"
+          routerLink="/Dashboard/Game"
           ><i class="bi bi-house-door-fill"></i> Inicio</a
         >
       </div>
       <div class="p-2 text-center mt-2">
         <a
           class="w-50 text-decoration-none fw-bold text-secondary fs-3 text-white"
-          routerLink="/hola"
+          routerLink="/Dashboard/Cards"
           ><i class="bi bi-person-badge-fill"></i> Cartas</a
         >
       </div>
@@ -37,20 +37,23 @@
           <h1 class="fw-bold" style="margin-left: 20px">Inicio</h1>
         </div>
         <div class="col-4 text-center">
-          <button
-            class="btn btn-danger p-2 mt-2 text-white fw-bold w-25"
-            (click)="salida()"
-          >
-            Logout
-          </button>
+          <div class="d-flex justify-content-between">
+            <h2>Diego Felipe</h2>
+            <button
+              class="btn btn-danger p-2 mt-2 text-white fw-bold w-25"
+              (click)="salida()"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      class="col-12 bg-white mt-2 shadow rounded-2 p-5"
-      style="height: 910px"
-    >
-      <router-outlet></router-outlet>
+      <div
+        class="col-12 bg-white mt-2 shadow rounded-2 p-5"
+        style="height: 910px"
+      >
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>

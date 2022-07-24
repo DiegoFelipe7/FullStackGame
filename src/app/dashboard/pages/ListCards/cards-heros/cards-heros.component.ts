@@ -41,7 +41,6 @@ export class CardsHerosComponent implements OnInit {
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(id)
         this.cards = this.cards.filter(card => card.cardId !== id);
         this.cardsService.deleteCard(id).subscribe(() => {
           Swal.fire(

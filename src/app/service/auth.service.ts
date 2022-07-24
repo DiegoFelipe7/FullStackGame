@@ -30,6 +30,12 @@ export class AuthService {
 
   }
 
+  /**
+   * metodo para la info del usuario logeado
+   */
+  getAuth(): void {
+    return { ...this.userData }
+  }
 
 
 
@@ -115,13 +121,16 @@ export class AuthService {
     })
   }
 
-
+  /**
+   * metodo que retonar el usuario logeado
+   * @returns usuario logeado
+   */
   getUserLogged() {
     return this.afAuth.authState;
   }
 
   logout() {
-
+    this.afAuth.signOut();
   }
 
 
