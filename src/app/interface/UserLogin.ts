@@ -1,5 +1,5 @@
 export interface userLogin {
     playerId: string,
-    email: string,
+    email: String,
     //gamePlayer: string[]
 }
