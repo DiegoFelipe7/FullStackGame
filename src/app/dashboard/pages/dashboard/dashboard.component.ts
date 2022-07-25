@@ -9,10 +9,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  user: userLogin = {
-    playerId: JSON.parse(localStorage.getItem("id")!),
-    email: JSON.parse(localStorage.getItem("email")!)
-  }
+
+   
+  
   constructor(private authService: AuthService) {
     console.log(authService.User)
   }
