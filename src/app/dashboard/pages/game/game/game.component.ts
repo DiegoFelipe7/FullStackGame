@@ -11,8 +11,8 @@ import { GameService } from 'src/app/service/game.service';
 export class GameComponent implements OnInit {
   games: Game[] = [];
   player: userLogin = {
-    playerId: JSON.parse(localStorage.getItem("id")!),
-    email: JSON.parse(localStorage.getItem("email")!)
+    playerId: localStorage.getItem("id")!,
+    email: localStorage.getItem("email")!
   }
   constructor(private gameService: GameService, private router: Router) { }
 
@@ -26,8 +26,7 @@ export class GameComponent implements OnInit {
   }
 
   addPlayerGame(id: string): void {
-    console.log(this.player)
-    this.gameService.addPlayer(id, this.player).subscribe(() => this.router.navigate(["/Dashboard/GameBoard"]))
+    // this.gameService.addPlayer(id, this.player).subscribe(() => this.router.navigate(["/Dashboard/GameBoard"]))
   }
 
 }
