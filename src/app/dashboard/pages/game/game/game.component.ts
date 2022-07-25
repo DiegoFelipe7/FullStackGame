@@ -21,7 +21,7 @@ export class GameComponent implements OnInit {
   }
   getGame(): void {
     this.gameService.getGame().subscribe(res => {
-      this.games?.push(res[0])
+    this.games?.push(...res)
     });
   }
 

@@ -15,19 +15,15 @@ export class GameBoardComponent implements OnInit {
 
 
   constructor(private gameService: GameService, private router : ActivatedRoute) {
-    
+
    }
 
   ngOnInit(): void {
-    this.getGame();
+
+    this.getGameById();
     console.log(this.game)
   }
 
-  getGame(): void {
-    this.gameService.getGame().subscribe((res)=>{
-      this.game.push(res[0]);
-    })
-  }
 
   getGameById() :void{
     const idReceipt =this.router.snapshot.params['id']

@@ -33,8 +33,8 @@ export class GameService {
   }
   /**
    * Metodo para crear un juego y un tablero
-   * @param board 
-   * @returns 
+   * @param board
+   * @returns
    */
   createGame(board: Board) {
     const url = `${this.url}/createGame`;
@@ -42,6 +42,6 @@ export class GameService {
   }
 
   getGameById(id: string):Observable<Game>{
-    return this.http.get<Game>(`${this.url}/api/game/listgame/${id}`);
+    return this.http.get<Game>(`${this.url}/listgame/${id}`);
   }
 }
