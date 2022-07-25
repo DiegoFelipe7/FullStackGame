@@ -12,8 +12,8 @@ export class GameComponent implements OnInit {
   games: Game[] = [];
   // @Input() userLogin: userLogin;
   player: userLogin = {
-    playerId: JSON.parse(localStorage.getItem("id")!),
-    email: JSON.parse(localStorage.getItem("email")!)
+    playerId: localStorage.getItem("id")!,
+    email: localStorage.getItem("email")!
   }
   constructor(private gameService: GameService, private router: Router) { }
 
