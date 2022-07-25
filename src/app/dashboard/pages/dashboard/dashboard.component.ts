@@ -13,9 +13,9 @@ export class DashboardComponent implements OnInit {
     playerId: localStorage.getItem("id")!,
     email: localStorage.getItem("email")!
   }
-   
+
   constructor(private authService: AuthService) {
-    console.log(authService.User)
+
   }
 
   ngOnInit(): void {

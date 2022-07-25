@@ -4,9 +4,12 @@
 <div
   class="d-flex justify-content-between align-content-center"
   style="margin-top: 100px"
-  *ngFor="let game of games"
 >
-  <div class="card mb-3 shadow rounded" style="width: 620px">
+  <div
+    *ngFor="let game of games; let indice = index"
+    class="card mb-3 shadow rounded"
+    style="width: 650px"
+  >
     <div class="row g-0">
       <div class="col-md-6">
         <img
@@ -17,7 +20,9 @@
       </div>
       <div class="col-md-6">
         <div class="container">
-          <h2 class="text-center fw-bold">Cartas Marvel 🦸</h2>
+          <h2 class="text-center fw-bold">
+            Cartas Marvel 🦸 #{{ indice + 1 }}
+          </h2>
           <div class="mt-2">
             <div class="text-left">
               Juego de cartas de marvel,es un juego donde tiene la participacion
@@ -32,14 +37,14 @@
                 <li>Iron man</li>
                 <li>Thor</li>
                 <li>4 fantasticos</li>
-                <li>{{game.id}}</li>
               </ul>
             </div>
           </div>
           <div class="mt-4">
             <button
               class="w-100 btn btn-dark text-white fw-bold p-2 fs-5"
-              (click)="addPlayerGame(game.id)">
+              (click)="addPlayerGame(game.id)"
+            >
               <i class="bi bi-controller"></i> Jugar
             </button>
           </div>
