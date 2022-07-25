@@ -25,7 +25,7 @@ export class SingInComponent implements OnInit {
   }
 
   registerGoogle() {
-    this.authService.SingInGoogle().then(() => this.router.navigate(["/dashboard"]))
+    this.authService.SingInGoogle().then(() => this.router.navigate(["/Dashboard/Cards"]).catch(()=> Swal.fire('Ocurrió un error inesperado')));
   }
 
 
