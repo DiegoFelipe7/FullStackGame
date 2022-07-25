@@ -17,14 +17,8 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        const usuario: userLogin = {
-          playerId: user.uid,
-          email: ` ${user.email}`,
-        }
-        localStorage.setItem("player", JSON.stringify(usuario))
-        localStorage.setItem('playerId', JSON.stringify(user.uid));
-        localStorage.setItem('email', JSON.stringify(user.email));
-        localStorage.setItem("player", JSON.stringify(usuario))
+        localStorage.setItem('playerId', user.uid!);
+        localStorage.setItem('email', user.email!);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -35,8 +29,8 @@ export class AuthService {
 
   /**
    * metodo para realizar un registro con google
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
   async SingInGoogle() {
     try {
@@ -49,8 +43,8 @@ export class AuthService {
 
   /**
    * metodo para iniciar sesion en la app
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
 
   async SignIn(email: string, password: string) {
@@ -68,8 +62,8 @@ export class AuthService {
 
   /**
    * Metodo para realizar el registro de usuario
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
   async SignUp(name: string, email: string, password: string) {
     try {
@@ -86,8 +80,8 @@ export class AuthService {
 
   /**
    * Metodo para la creacion de una coleccion de usuarios
-   * @param user 
-   * @returns 
+   * @param user
+   * @returns
    */
   async SetUserData(user: any, name: string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
