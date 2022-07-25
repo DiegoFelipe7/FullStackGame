@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Game } from '../interface/Prueba';
-import { Players } from '../interface/Players';
+import { userLogin } from '../interface/UserLogin';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,8 +27,8 @@ export class GameService {
    * @returns Game
    */
 
-  addPlayer(id: string): Observable<Game> {
-    const url = `${this.url}/game/${id}`
-    return this.http.put<Game>(url, this.httpOptions);
+  addPlayer(id: string, usuario: userLogin): Observable<userLogin> {
+    const url = `${this.url}/player/${id}`
+    return this.http.put<userLogin>(url, usuario, this.httpOptions);
   }
 }

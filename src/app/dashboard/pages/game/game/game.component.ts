@@ -10,7 +10,11 @@ import { GameService } from 'src/app/service/game.service';
 })
 export class GameComponent implements OnInit {
   games: Game[] = [];
-  @Input() userLogin: userLogin | undefined;
+  // @Input() userLogin: userLogin;
+  user: userLogin = {
+    id: `${localStorage.getItem("id")}`,
+    email: `${localStorage.getItem("email")}`
+  }
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
@@ -22,8 +26,8 @@ export class GameComponent implements OnInit {
     });
   }
 
-  addPlayerGame(id: string,): void {
-    console.log(id);
+  addPlayerGame(id: string): void {
+    this.gameService.addPlayer(id, this.user).subscribe(() => console.log("agregado"))
   }
 
 }
