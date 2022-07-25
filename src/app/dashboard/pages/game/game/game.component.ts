@@ -11,7 +11,7 @@ import { GameService } from 'src/app/service/game.service';
 export class GameComponent implements OnInit {
   games: Game[] = [];
   // @Input() userLogin: userLogin;
-  user: userLogin = {
+  player: userLogin = {
     playerId: JSON.parse(localStorage.getItem("id")!),
     email: JSON.parse(localStorage.getItem("email")!)
   }
