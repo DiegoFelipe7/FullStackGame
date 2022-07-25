@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Game } from '../interface/Prueba';
+import { Board, Game } from '../interface/Prueba';
 import { userLogin } from '../interface/UserLogin';
 @Injectable({
   providedIn: 'root'
@@ -23,12 +23,17 @@ export class GameService {
   }
   /**
    * Metodo para agregar jugadores a un juego
-   * @param id id del juego 
+   * @param id id del juego
    * @returns Game
    */
 
   addPlayer(id: string, usuario: userLogin): Observable<userLogin> {
     const url = `${this.url}/player/${id}`
     return this.http.put<userLogin>(url, usuario, this.httpOptions);
+  }
+
+  createGame(board:Board){
+    const url =`${this.url}/createGame`;
+    return this.http.post<Board>(url,board,this.httpOptions);
   }
 }
