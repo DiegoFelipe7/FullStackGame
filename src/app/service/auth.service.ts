@@ -19,7 +19,6 @@ export class AuthService {
       if (user) {
         localStorage.setItem('id', JSON.stringify(user.uid));
         localStorage.setItem('email', JSON.stringify(user.email));
-
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -27,7 +26,6 @@ export class AuthService {
     });
 
   }
-
 
   /**
    * metodo para realizar un registro con google
