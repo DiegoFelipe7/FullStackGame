@@ -21,12 +21,13 @@ export class GameComponent implements OnInit {
   }
   getGame(): void {
     this.gameService.getGame().subscribe(res => {
-      this.games?.push(res[0])
+      this.games?.push(...res)
     });
   }
 
   addPlayerGame(id: string): void {
-    // this.gameService.addPlayer(id, this.player).subscribe(() => this.router.navigate(["/Dashboard/GameBoard"]))
+    console.log(this.player)
+    this.gameService.addPlayer(id, this.player).subscribe(() => this.router.navigate([`/Dashboard/GameBoard/${id}`]))
   }
 
 }

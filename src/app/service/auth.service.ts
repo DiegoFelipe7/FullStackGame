@@ -8,13 +8,24 @@ import { Users } from '../interface/Users';
 import Swal from 'sweetalert2';
 import firebase from 'firebase/compat/app';
 import { userLogin } from '../interface/UserLogin';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   User: boolean | undefined;
-  constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
+  private urlRequestMongo = 'api/player/createplayer';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+  constructor(
+    public afAuth: AngularFireAuth,
+    public afs: AngularFirestore,
+    private http: HttpClient
+  ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         localStorage.setItem('id', user.uid!);
@@ -24,7 +35,6 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-
   }
 
   /**
@@ -34,12 +44,18 @@ export class AuthService {
    */
   async SingInGoogle() {
     try {
-      let res = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      let res = await this.afAuth.signInWithPopup(
+        new firebase.auth.GoogleAuthProvider()
+      );
+      const player:userLogin ={
+        playerId:res.user?.uid!,
+        email:res.user?.email!
+      }
+      this.mongoRegister(player).subscribe();
     } catch (error) {
-      console.log("Ocurrio un error con con el servidor")
+      console.log('Ocurrio un error con con el servidor');
     }
   }
-
 
   /**
    * metodo para iniciar sesion en la app
@@ -49,16 +65,11 @@ export class AuthService {
 
   async SignIn(email: string, password: string) {
     try {
-      await this.afAuth
-        .signInWithEmailAndPassword(email, password);
-
+      await this.afAuth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       Swal.fire('Revisa tu correo o contraseña');
     }
   }
-
-
-
 
   /**
    * Metodo para realizar el registro de usuario
@@ -67,15 +78,27 @@ export class AuthService {
    */
   async SignUp(name: string, email: string, password: string) {
     try {
-      const result = await this.afAuth
-        .createUserWithEmailAndPassword(email, password);
-      console.log(result)
+      const result = await this.afAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      const player: userLogin = {
+        playerId: result.user?.uid!,
+        email: email,
+      };
+      this.mongoRegister(player).subscribe();
+      console.log(result.user?.uid);
       await this.SetUserData(result.user, name);
-
     } catch (error) {
       window.alert(error);
-
     }
+  }
+  mongoRegister(player: userLogin): Observable<userLogin> {
+    return this.http.post<userLogin>(
+      this.urlRequestMongo,
+      player,
+      this.httpOptions
+    );
   }
 
   /**
@@ -104,9 +127,9 @@ export class AuthService {
    */
 
   checkIfUserIsLoggedIn() {
-    this.afAuth.onAuthStateChanged(users => {
-      !users ? this.User = false : this.User = true;
-    })
+    this.afAuth.onAuthStateChanged((users) => {
+      !users ? (this.User = false) : (this.User = true);
+    });
   }
 
   /**
@@ -114,14 +137,10 @@ export class AuthService {
    * @returns usuario logeado
    */
   getUserLogged() {
-    this.afAuth.authState.subscribe((user) =>
-      console.log(user)
-    );
+    this.afAuth.authState.subscribe((user) => console.log(user));
   }
 
   logout() {
     this.afAuth.signOut();
   }
-
-
 }
