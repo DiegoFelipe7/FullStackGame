@@ -1,45 +1,9 @@
 <div class="row" style="height: 820px">
-  <div class="col-1 shadow p-2 rounded" style="border: 2px solid#fff">
+  <div class="col-1 shadow p-2 rounded" style="border: 2px solid#fff" *ngFor="let gam of game">
     <div class="text-center mt-2">
-      <p class="fw-bold fs-5">Diego</p>
+      <p class="fw-bold fs-5">{{gam.players[game.indexOf(gam)].email}}</p>
       <img
         src="../../../../../assets/img/game/1.png"
-        class="rounded mx-auto d-block bg-danger rounded-5"
-        style="width: 80px"
-        alt="..."
-      />
-    </div>
-    <div class="text-center mt-2">
-      <p class="fw-bold fs-5">Felipe</p>
-      <img
-        src="../../../../../assets/img/game/2.png"
-        class="rounded mx-auto d-block bg-danger rounded-5"
-        style="width: 80px"
-        alt="..."
-      />
-    </div>
-    <div class="text-center mt-2">
-      <p class="fw-bold fs-5">Camilo</p>
-      <img
-        src="../../../../../assets/img/game/3.png"
-        class="rounded mx-auto d-block bg-danger rounded-5"
-        style="width: 80px"
-        alt="..."
-      />
-    </div>
-    <div class="text-center mt-2">
-      <p class="fw-bold fs-5">Daniel</p>
-      <img
-        src="../../../../../assets/img/game/4.png"
-        class="rounded mx-auto d-block bg-danger rounded-5"
-        style="width: 80px"
-        alt="..."
-      />
-    </div>
-    <div class="text-center mt-2">
-      <p class="fw-bold fs-5">Erick</p>
-      <img
-        src="../../../../../assets/img/game/5.png"
         class="rounded mx-auto d-block bg-danger rounded-5"
         style="width: 80px"
         alt="..."

@@ -40,4 +40,8 @@ export class GameService {
     const url = `${this.url}/createGame`;
     return this.http.post<Board>(url, board, this.httpOptions);
   }
+
+  getGameById(id: string):Observable<Game>{
+    return this.http.get<Game>(`${this.url}/api/game/listgame/${id}`);
+  }
 }
