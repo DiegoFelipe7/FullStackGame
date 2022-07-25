@@ -1,4 +1,4 @@
 export interface userLogin {
-    id: string,
+    playerId: string,
     email: string
 }
