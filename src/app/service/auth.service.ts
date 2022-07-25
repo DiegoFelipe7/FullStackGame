@@ -17,7 +17,7 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        localStorage.setItem('playerId', user.uid!);
+        localStorage.setItem('id', user.uid!);
         localStorage.setItem('email', user.email!);
       } else {
         localStorage.setItem('user', 'null');
