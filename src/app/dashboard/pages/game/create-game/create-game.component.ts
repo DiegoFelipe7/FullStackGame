@@ -26,7 +26,6 @@ export class CreateGameComponent implements OnInit {
         ["/Dashboard/Game"]
       )
     })
-
   }
 
 }

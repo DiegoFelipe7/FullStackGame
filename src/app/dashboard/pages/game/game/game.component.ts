@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Game, Player } from 'src/app/interface/Prueba';
 import { userLogin } from 'src/app/interface/UserLogin';
-import { Users } from 'src/app/interface/Users';
 import { GameService } from 'src/app/service/game.service';
 @Component({
   selector: 'app-game',
@@ -10,12 +10,11 @@ import { GameService } from 'src/app/service/game.service';
 })
 export class GameComponent implements OnInit {
   games: Game[] = [];
-  // @Input() userLogin: userLogin;
-  user: userLogin = {
-    id: `${localStorage.getItem("id")}`,
-    email: `${localStorage.getItem("email")}`
+  player: userLogin = {
+    playerId: JSON.parse(localStorage.getItem("playerId")!),
+    email: JSON.parse(localStorage.getItem("email")!),
   }
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private router: Router) { }
 
   ngOnInit(): void {
     this.getGame();
@@ -27,7 +26,8 @@ export class GameComponent implements OnInit {
   }
 
   addPlayerGame(id: string): void {
-    this.gameService.addPlayer(id, this.user).subscribe(() => console.log("agregado"))
+    console.log(this.player)
+    this.gameService.addPlayer(id, this.player).subscribe(() => this.router.navigate(["/Dashboard/GameBoard"]))
   }
 
 }
