@@ -1,9 +1,16 @@
 <div class="row" style="height: 820px">
-  <div class="col-1 shadow p-2 rounded" style="border: 2px solid#fff" *ngFor="let gam of game">
-    <div class="text-center mt-2">
-      <p class="fw-bold fs-5">{{gam.players[game.indexOf(gam)].email}}</p>
+  <div
+    class="col-1 shadow p-2 rounded"
+    style="border: 2px solid#fff"
+    *ngFor="let gam of game"
+  >
+    <div
+      class="text-center mt-2"
+      *ngFor="let players of gam.players; let indice = index"
+    >
+      <p class="fw-bold fs-5">{{ gam.players[indice].email }}</p>
       <img
-        src="../../../../../assets/img/game/1.png"
+        src="../../../../../assets/img/game/{{ indice + 1 }}.png"
         class="rounded mx-auto d-block bg-danger rounded-5"
         style="width: 80px"
         alt="..."
