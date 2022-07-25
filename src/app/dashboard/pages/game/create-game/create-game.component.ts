@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Board } from 'src/app/interface/Prueba';
 
 @Component({
   selector: 'app-create-game',
