@@ -12,6 +12,7 @@ const routes: Routes = [
       [
         { path: 'CreateGame', component: CreateGameComponent },
         { path: 'Game', component: GameComponent },
+        { path: "GameBoard", component: GameBoardComponent },
         { path: 'Cards', component: CardsHerosComponent },
         { path: '**', redirectTo: 'CreateGame' }
       ]

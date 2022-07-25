@@ -29,11 +29,15 @@ export class GameService {
 
   addPlayer(id: string, usuario: userLogin): Observable<userLogin> {
     const url = `${this.url}/player/${id}`
-    return this.http.put<userLogin>(url, usuario, this.httpOptions);
+    return this.http.post<userLogin>(url, usuario, this.httpOptions);
   }
-
-  createGame(board:Board){
-    const url =`${this.url}/createGame`;
-    return this.http.post<Board>(url,board,this.httpOptions);
+  /**
+   * Metodo para crear un juego y un tablero
+   * @param board 
+   * @returns 
+   */
+  createGame(board: Board) {
+    const url = `${this.url}/createGame`;
+    return this.http.post<Board>(url, board, this.httpOptions);
   }
 }
