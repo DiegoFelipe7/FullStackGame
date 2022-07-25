@@ -23,7 +23,9 @@ export class SingUpComponent implements OnInit {
     }
 
     this.authService.SignUp(name, email, password)
-    .then(() => this.router.navigate(["/Dashboard/Cards"]).catch(() => Swal.fire('Ocurrió un error en el registro'))
+    .then(() =>
+    // this.router.navigate(["/Dashboard/Cards"]).catch(() => Swal.fire('Ocurrió un error en el registro'))
+    console.log("hola")
     );
   }
 }
