@@ -34,14 +34,26 @@ export class GameBoardComponent implements OnInit, OnChanges {
     const idReceipt = this.router.snapshot.params['id']
     this.gameService.getGameById(idReceipt).subscribe((res) => {
       this.game.push(res);
-      res.players.filter(player => player.playerId === localStorage.getItem("id") ? this.cardsPlayer.push(player) : console.log("error"))
-
+      this.updateCards(res);
     });
   }
 
 
   getCardsPlayer(): void {
 
+  }
+
+  betCard(cardId:string,playerId:string):void{
+    const idReceipt = this.router.snapshot.params['id']
+      this.gameService.betCard(cardId,playerId,idReceipt).subscribe((res)=>{
+        this.game[0]=res;
+        this.updateCards(res);
+      })
+  }
+
+  updateCards(res:Game):void{
+
+    res.players.filter(player => player.playerId === localStorage.getItem("id") ? this.cardsPlayer[0]=player : console.log("error"))
   }
 
 }

@@ -49,4 +49,9 @@ export class GameService {
   getGameById(id: string): Observable<Game> {
     return this.http.get<Game>(`${this.url}/listgame/${id}`)
   }
+
+  betCard(cardId:string,playerId:string,gameId:string):Observable<Game>{
+ const url = `${this.url}/${gameId}/betcard/${playerId}/card/${cardId}`
+return this.http.post<Game>(url,this.httpOptions);
+  }
 }
