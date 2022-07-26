@@ -15,12 +15,8 @@ export class GameBoardComponent implements OnInit, OnChanges {
   game: Game[] = [];
   cardsPlayer: Player[] = []
   cardsBoard: any[] = []
-<<<<<<< HEAD
-  map = new Map();
-=======
->>>>>>> 13ca8b1b794d923cfcf52111a5546c3b6312cb50
   suscribcion!: Subscription;
-
+  img: string = "../../../../../assets/img/game/vacio.png"
   constructor(private gameService: GameService, private router: ActivatedRoute) {
     this.suscribcion = this.gameService._refresh.subscribe(() => {
       this.getGameById();
@@ -65,6 +61,10 @@ export class GameBoardComponent implements OnInit, OnChanges {
   getBoard(res: Game): void {
     console.log(res);
     this.cardsBoard[0] = (res.board.cardsInGame);
-    console.log(this.cardsBoard)
+    console.log(this.cardsBoard[0])
+   let  viewed:Boolean  = this.cardsBoard[0].some((element: { viewed: boolean; })=>element.viewed===true);
+   if(viewed){
+    this.gameService.winnerRound(res.id).subscribe((res)=>this.updateCards(res))
+   }
   }
 }
