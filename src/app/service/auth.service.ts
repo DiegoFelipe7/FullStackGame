@@ -34,7 +34,14 @@ export class AuthService {
    */
   async SingInGoogle() {
     try {
-      let res = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      let res = await this.afAuth.signInWithPopup(
+        new firebase.auth.GoogleAuthProvider()
+      );
+      const player: userLogin = {
+        playerId: res.user?.uid!,
+        email: res.user?.email!
+      }
+      this.mongoRegister(player).subscribe();
     } catch (error) {
       console.log("Ocurrio un error con con el servidor")
     }
@@ -77,6 +84,7 @@ export class AuthService {
 
     }
   }
+
 
   /**
    * Metodo para la creacion de una coleccion de usuarios

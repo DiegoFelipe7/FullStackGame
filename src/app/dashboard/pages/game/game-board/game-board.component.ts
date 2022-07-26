@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Game } from 'src/app/interface/Prueba';
@@ -10,7 +10,7 @@ import { GameService } from 'src/app/service/game.service';
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.css']
 })
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent implements OnInit, OnChanges {
 
   game: Game[] = [];
   suscribcion!: Subscription;
@@ -20,15 +20,14 @@ export class GameBoardComponent implements OnInit {
       this.getGameById();
     })
   }
-
   ngOnInit(): void {
     this.getGameById();
-    this.suscribcion = this.gameService._refresh.subscribe(() => {
-      this.getGameById();
-    })
-
+    console.log("first")
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getGameById();
+    console.log(changes);
+  }
 
   getGameById(): void {
     const idReceipt = this.router.snapshot.params['id']
