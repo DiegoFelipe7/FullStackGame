@@ -12,7 +12,15 @@ export interface Board {
     principalMallet: PrincipalMallet[];
 }
 
+
 export interface CardsInGame {
+
+}
+
+export interface hola {
+    boardId?: string;
+    cardsInGame?: { [key: string]: Card };
+    principalMallet?: PrincipalMallet[];
 }
 
 export interface PrincipalMallet {
@@ -40,3 +48,4 @@ export interface Round {
     number: number;
     time: string;
 }
+

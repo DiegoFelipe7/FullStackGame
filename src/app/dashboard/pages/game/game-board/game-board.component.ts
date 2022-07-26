@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Game, Player } from 'src/app/interface/Prueba';
+import { hola, Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 
 
@@ -14,6 +14,7 @@ export class GameBoardComponent implements OnInit, OnChanges {
 
   game: Game[] = [];
   cardsPlayer: Player[] = []
+  cardsBoard: hola[] = []
   suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
@@ -35,6 +36,7 @@ export class GameBoardComponent implements OnInit, OnChanges {
     this.gameService.getGameById(idReceipt).subscribe((res) => {
       this.game.push(res);
       this.updateCards(res);
+      this.getBoard(res);
     });
   }
 
@@ -43,17 +45,22 @@ export class GameBoardComponent implements OnInit, OnChanges {
 
   }
 
-  betCard(cardId:string,playerId:string):void{
+  betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id']
-      this.gameService.betCard(cardId,playerId,idReceipt).subscribe((res)=>{
-        this.game[0]=res;
-        this.updateCards(res);
-      })
+    this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
+      this.game[0] = res;
+      this.updateCards(res);
+    })
   }
 
-  updateCards(res:Game):void{
+  updateCards(res: Game): void {
+    res.players.filter(player => player.playerId === localStorage.getItem("id") ? this.cardsPlayer[0] = player : console.log("error"))
+    this.getBoard(res)
+  }
 
-    res.players.filter(player => player.playerId === localStorage.getItem("id") ? this.cardsPlayer[0]=player : console.log("error"))
+  getBoard(res: Game): void {
+    this.cardsBoard[0] = res.board.cardsInGame
+    console.log(this.cardsBoard)
   }
 
 }

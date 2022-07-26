@@ -16,10 +16,29 @@
         alt="..."
       />
     </div>
-
   </div>
   <div class="col-9 marvel" style="height: 820px">
-    <div class="d-flex justify-content-center align-content-center"></div>
+    <div
+      class="d-flex justify-content-center align-content-center"
+      *ngFor="let card of cardsBoard"
+    >
+      <div>
+        <!--*ngFor="let cards of card.cardsInGame"-->
+        <div class="card bg-dark mt-2" style="width: 13rem 14rem">
+          <h4 class="text-center text-white fw-bold"></h4>
+          <p class="text-center text-white fs-5"></p>
+          <div class="card-body">
+            <img class="w-100 h-100" style="border: 1px solid#fff" />
+          </div>
+          <div class="card-footer text-center">
+            <button class="rounded-3 btn btn-light fw-bold">
+              Apostar carta
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
   </div>
   <div class="col-2 shadow" style="height: 820px">
     <h4 class="text-center fw-bold"></h4>
@@ -31,15 +50,23 @@
       >
         <h4 class="text-center text-white fw-bold">
           {{ card.card.nameOfCard }}
-
         </h4>
-        <p class="text-center text-white fs-5">Power: {{card.card.power}}</p>
+        <p class="text-center text-white fs-5">Power: {{ card.card.power }}</p>
         <div class="card-body">
-          <img src="{{ card.card.urlImage }}" class="w-100 h-100" style="border: 1px solid#fff ;" />
+          <img
+            src="{{ card.card.urlImage }}"
+            class="w-100 h-100"
+            style="border: 1px solid#fff"
+          />
         </div>
-        <div class="card-footer text-center"><button class="rounded-3 btn btn-light fw-bold"
-          (click)="betCard(card.card.cardId,gam.playerId)"
-           >Apostar carta</button></div>
+        <div class="card-footer text-center">
+          <button
+            class="rounded-3 btn btn-light fw-bold"
+            (click)="betCard(card.card.cardId, gam.playerId)"
+          >
+            Apostar carta
+          </button>
+        </div>
       </div>
     </div>
   </div>
