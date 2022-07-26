@@ -23,13 +23,23 @@ export class CardsHerosComponent implements OnInit {
   ngOnInit(): void {
     this.getCards();
   }
-
+  /**
+   * metodo para traer todas las cartas de la bd
+   */
   getCards(): void {
     this.cardsService.getCards().subscribe(card => this.cards = card);
   }
+  /**
+   * metodo para realizar la busqueda de una carta por id
+   * @param id 
+   */
   getCardId(id: String): void {
     this.cardsService.getCardsId(id).subscribe(card => this.cardId = card);
   }
+  /**
+   * Metodo para eliminar una carta
+   * @param id 
+   */
   removeCards(id: String): void {
     Swal.fire({
       title: '¿Estas seguro?',

@@ -30,7 +30,9 @@ export class GameBoardComponent implements OnInit, OnChanges {
     this.getGameById();
     console.log(changes);
   }
-
+  /**
+   * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
+   */
   getGameById(): void {
     const idReceipt = this.router.snapshot.params['id']
     this.gameService.getGameById(idReceipt).subscribe((res) => {
@@ -44,7 +46,11 @@ export class GameBoardComponent implements OnInit, OnChanges {
   getCardsPlayer(): void {
 
   }
-
+  /**
+   * Metodo para enviar una carta al tablero
+   * @param cardId 
+   * @param playerId 
+   */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id']
     this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
@@ -52,12 +58,19 @@ export class GameBoardComponent implements OnInit, OnChanges {
       this.updateCards(res);
     })
   }
+  /**
+   * Metodo para filtrar las cartas que pertenecen al usuario que inicio sesion
+   * @param res 
+   */
 
   updateCards(res: Game): void {
     res.players.filter(player => player.playerId === localStorage.getItem("id") ? this.cardsPlayer[0] = player : console.log("error"))
     this.getBoard(res)
   }
-
+  /**
+   * metodo para llenar el arreglo de cartas que se encuentran en el board
+   * @param res 
+   */
   getBoard(res: Game): void {
     console.log(res);
     this.cardsBoard[0] = (res.board.cardsInGame);

@@ -34,6 +34,13 @@ export class AuthGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
-    return this.authService.verifySession();
+    return this.authService.verifySession().pipe(
+      tap(session => {
+        if (!session) {
+          this.route.navigate(["/auth/SignIn"])
+        }
+
+      })
+    )
   }
 }

@@ -15,6 +15,13 @@ export class SingUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Metodo para registrar un usuario por medio de el form
+   * @param name 
+   * @param email 
+   * @param password 
+   * @returns 
+   */
   normalAuthentication(name: string, email: string, password: string): void {
 
     if (email.trim() == "" || password.trim() == "" || name.trim() == "") {
