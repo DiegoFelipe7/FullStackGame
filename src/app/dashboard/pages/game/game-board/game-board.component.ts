@@ -15,10 +15,6 @@ export class GameBoardComponent implements OnInit, OnChanges {
   game: Game[] = [];
   cardsPlayer: Player[] = []
   cardsBoard: any[] = []
-<<<<<<< HEAD
-  map = new Map();
-=======
->>>>>>> 13ca8b1b794d923cfcf52111a5546c3b6312cb50
   suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
