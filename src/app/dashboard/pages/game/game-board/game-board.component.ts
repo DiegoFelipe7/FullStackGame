@@ -14,7 +14,7 @@ export class GameBoardComponent implements OnInit, OnChanges {
 
   game: Game[] = [];
   cardsPlayer: Player[] = []
-  cardsBoard: hola[] = []
+  cardsBoard: any[] = []
   suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
@@ -59,7 +59,8 @@ export class GameBoardComponent implements OnInit, OnChanges {
   }
 
   getBoard(res: Game): void {
-    this.cardsBoard[0] = res.board.cardsInGame
+    console.log(res);
+    this.cardsBoard[0]=(res.board.cardsInGame);
     console.log(this.cardsBoard)
   }
 
