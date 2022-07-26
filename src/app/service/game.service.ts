@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Board, Game } from '../interface/Prueba';
 import { userLogin } from '../interface/UserLogin';
 @Injectable({
@@ -9,6 +9,7 @@ import { userLogin } from '../interface/UserLogin';
 export class GameService {
 
   private url = 'api/game';
+  _refresh = new Subject<void>();
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,7 +30,11 @@ export class GameService {
 
   addPlayer(id: string, usuario: userLogin): Observable<userLogin> {
     const url = `${this.url}/player/${id}`
-    return this.http.post<userLogin>(url, usuario, this.httpOptions);
+    return this.http.post<userLogin>(url, usuario, this.httpOptions).pipe(
+      tap(() => {
+        this._refresh.next();
+      })
+    );;
   }
   /**
    * Metodo para crear un juego y un tablero
@@ -41,7 +46,7 @@ export class GameService {
     return this.http.post<Board>(url, board, this.httpOptions);
   }
 
-  getGameById(id: string):Observable<Game>{
-    return this.http.get<Game>(`${this.url}/listgame/${id}`);
+  getGameById(id: string): Observable<Game> {
+    return this.http.get<Game>(`${this.url}/listgame/${id}`)
   }
 }

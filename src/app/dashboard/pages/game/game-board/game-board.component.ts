@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Game } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 
@@ -12,16 +13,20 @@ import { GameService } from 'src/app/service/game.service';
 export class GameBoardComponent implements OnInit {
 
   game: Game[] = [];
-
+  suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
-
+    this.suscribcion = this.gameService._refresh.subscribe(() => {
+      this.getGameById();
+    })
   }
 
   ngOnInit(): void {
-
     this.getGameById();
-    console.log(this.game)
+    this.suscribcion = this.gameService._refresh.subscribe(() => {
+      this.getGameById();
+    })
+
   }
 
 
