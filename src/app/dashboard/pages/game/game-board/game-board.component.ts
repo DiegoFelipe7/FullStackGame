@@ -16,7 +16,7 @@ export class GameBoardComponent implements OnInit, OnChanges {
   cardsPlayer: Player[] = []
   cardsBoard: any[] = []
   suscribcion!: Subscription;
-
+  img: string = "../../../../../assets/img/game/vacio.png"
   constructor(private gameService: GameService, private router: ActivatedRoute) {
     this.suscribcion = this.gameService._refresh.subscribe(() => {
       this.getGameById();
