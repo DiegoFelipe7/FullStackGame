@@ -48,7 +48,7 @@ export class GameService {
   /**
    * Metodo para buscar un juego
    * @param id game
-   * @returns 
+   * @returns
    */
   getGameById(id: string): Observable<Game> {
     return this.http.get<Game>(`${this.url}/listgame/${id}`)
@@ -58,10 +58,15 @@ export class GameService {
    * @param cardId carta
    * @param playerId  jugador
    * @param gameId  juego
-   * @returns 
+   * @returns
    */
   betCard(cardId: string, playerId: string, gameId: string): Observable<Game> {
     const url = `${this.url}/${gameId}/betcard/${playerId}/card/${cardId}`
     return this.http.post<Game>(url, this.httpOptions);
+  }
+
+  winnerRound(gameId:String):Observable<Game>{
+    const url=`${this.url}/selectroundwinner/${gameId}`
+    return this.http.post<Game>(url,this.httpOptions)
   }
 }
