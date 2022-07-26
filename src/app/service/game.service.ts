@@ -45,8 +45,23 @@ export class GameService {
     const url = `${this.url}/createGame`;
     return this.http.post<Board>(url, board, this.httpOptions);
   }
-
+  /**
+   * Metodo para buscar un juego
+   * @param id game
+   * @returns 
+   */
   getGameById(id: string): Observable<Game> {
     return this.http.get<Game>(`${this.url}/listgame/${id}`)
+  }
+  /**
+   *  Metodo para tirar una carta el tablero
+   * @param cardId carta
+   * @param playerId  jugador
+   * @param gameId  juego
+   * @returns 
+   */
+  betCard(cardId: string, playerId: string, gameId: string): Observable<Game> {
+    const url = `${this.url}/${gameId}/betcard/${playerId}/card/${cardId}`
+    return this.http.post<Game>(url, this.httpOptions);
   }
 }
