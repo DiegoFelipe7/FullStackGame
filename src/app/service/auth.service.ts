@@ -8,23 +8,33 @@ import { Users } from '../interface/Users';
 import Swal from 'sweetalert2';
 import firebase from 'firebase/compat/app';
 import { userLogin } from '../interface/UserLogin';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   User: boolean | undefined;
-  constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore) {
+  private urlRequestMongo = 'api/player/createplayer';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+  constructor(
+    public afAuth: AngularFireAuth,
+    public afs: AngularFirestore,
+    private http: HttpClient
+  ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        localStorage.setItem('playerId', user.uid!);
+        localStorage.setItem('id', user.uid!);
         localStorage.setItem('email', user.email!);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-
   }
 
   /**
@@ -84,8 +94,13 @@ export class AuthService {
 
     }
   }
-
-
+  mongoRegister(player: userLogin): Observable<userLogin> {
+    return this.http.post<userLogin>(
+      this.urlRequestMongo,
+      player,
+      this.httpOptions
+    );
+  }
   /**
    * Metodo para la creacion de una coleccion de usuarios
    * @param user
