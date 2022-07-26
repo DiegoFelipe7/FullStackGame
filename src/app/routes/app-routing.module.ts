@@ -9,8 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'Dashboard', loadChildren: () => import("../dashboard/dashboard.module").then(m => m.DashboardModule),
-    canLoad: [AuthGuard], // prevenir la carga si un usuario no inicia sesion
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard], // prevenir la carga de un componente
+    canActivate: [AuthGuard] //previene que el usuario ingrese a una ruta en especifico
   }
 ];
 

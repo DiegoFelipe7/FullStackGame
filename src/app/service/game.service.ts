@@ -54,7 +54,7 @@ export class GameService {
     return this.http.get<Game>(`${this.url}/listgame/${id}`)
   }
   /**
-   *  Metodo para tirar una carta el tablero
+   *  Metodo para enviar  una carta el tablero
    * @param cardId carta
    * @param playerId  jugador
    * @param gameId  juego

@@ -99,6 +99,11 @@ export class AuthService {
 
     }
   }
+  /**
+   * Metodo para registrar un usuario en back mongo
+   * @param player 
+   * @returns 
+   */
   mongoRegister(player: userLogin): Observable<userLogin> {
     return this.http.post<userLogin>(
       `${this.urlRequestMongo}/createplayer`,

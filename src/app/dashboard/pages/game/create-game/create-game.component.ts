@@ -19,7 +19,9 @@ export class CreateGameComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**
+   * Metodo para crear un nuevo juego a partir del servicio create game
+   */
   createGame() {
     this.gameService.createGame(this.board).subscribe(() => {
       this.router.navigate(

@@ -20,7 +20,9 @@ export class CardsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**
+   * metodo para actualizar una carta
+   */
   UpdateCard(): void {
     if (this.cardsHero)
       this.cardsService.updateCard(this.cardsHero).subscribe(() => {
