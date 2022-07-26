@@ -9,14 +9,15 @@ import Swal from 'sweetalert2';
 import firebase from 'firebase/compat/app';
 import { userLogin } from '../interface/UserLogin';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { Player } from '../interface/Prueba';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   User: boolean | undefined;
-  private urlRequestMongo = 'api/player/createplayer';
+  private urlRequestMongo = 'api/player';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -86,7 +87,11 @@ export class AuthService {
     try {
       const result = await this.afAuth
         .createUserWithEmailAndPassword(email, password);
-      console.log(result)
+      const player: userLogin = {
+        playerId: result.user?.uid!,
+        email: email
+      }
+      this.mongoRegister(player).subscribe();
       await this.SetUserData(result.user, name);
 
     } catch (error) {
@@ -96,7 +101,7 @@ export class AuthService {
   }
   mongoRegister(player: userLogin): Observable<userLogin> {
     return this.http.post<userLogin>(
-      this.urlRequestMongo,
+      `${this.urlRequestMongo}/createplayer`,
       player,
       this.httpOptions
     );
@@ -122,6 +127,8 @@ export class AuthService {
       merge: true,
     });
   }
+
+
   /**
    * Verificacion del usuario logueado
    */
@@ -141,10 +148,31 @@ export class AuthService {
       console.log(user)
     );
   }
+  /**
+   * metodo para cerrar la sesion y eliminar la sesion de localstora
+   */
 
   logout() {
     this.afAuth.signOut();
+    localStorage.removeItem("id")
+    localStorage.removeItem("email")
   }
+  /**
+   * metodo para verificar si un usuario esta activo
+   * @returns 
+   */
+  verifySession(): Observable<boolean> {
+    const id = localStorage.getItem("id");
+    if (!localStorage.getItem("id")) {
+      return of(false);
+    }
+    return this.http.get<Player>(`${this.urlRequestMongo}/listplayer/${id}`).pipe(
+      map(auth => {
+        return true;
+      })
+    )
+  }
+
 
 
 }

@@ -20,10 +20,9 @@
   <div class="col-9 marvel" style="height: 820px">
     <div
       class="d-flex justify-content-center align-content-center"
-      *ngFor="let card of cardsBoard"
+      *ngFor="let card of cardsBoard; let indice = index"
     >
       <div>
-        <!--*ngFor="let cards of card.cardsInGame"-->
         <div class="card bg-dark mt-2" style="width: 13rem 14rem">
           <h4 class="text-center text-white fw-bold"></h4>
           <p class="text-center text-white fs-5"></p>

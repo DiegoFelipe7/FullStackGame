@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { elementAt, Subscription } from 'rxjs';
 import { hola, Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 
@@ -14,7 +14,8 @@ export class GameBoardComponent implements OnInit, OnChanges {
 
   game: Game[] = [];
   cardsPlayer: Player[] = []
-  cardsBoard: hola[] = []
+  cardsBoard: any[] = []
+  map = new Map();
   suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
@@ -59,8 +60,10 @@ export class GameBoardComponent implements OnInit, OnChanges {
   }
 
   getBoard(res: Game): void {
-    this.cardsBoard[0] = res.board.cardsInGame
-    console.log(this.cardsBoard)
+    this.cardsBoard[0] = res.board.cardsInGame;
+    this.cardsBoard.forEach((element, index) => {
+      this.map.set(index, element)
+    });
+    console.log(this.map)
   }
-
 }
