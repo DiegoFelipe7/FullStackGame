@@ -100,7 +100,6 @@ export class AuthService {
       this.httpOptions
     );
   }
-
   /**
    * Metodo para la creacion de una coleccion de usuarios
    * @param user
