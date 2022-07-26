@@ -20,15 +20,17 @@
   <div class="col-9 marvel" style="height: 820px">
     <div class="d-flex justify-content-center align-content-center"></div>
   </div>
-  <div class="col-2 shadow" style="height: 820px" *ngFor="let gam of game">
-    <div class="scroll" *ngFor="let players of gam.players; let indice = index">
-      <h4 class="text-center fw-bold">{{ players.email }}</h4>
+  <div class="col-2 shadow" style="height: 820px">
+    <h4 class="text-center fw-bold"></h4>
+    <div class="scroll" *ngFor="let gam of cardsPlayer">
       <div
-        class="card bg-dark"
+        class="card bg-dark mt-2"
         style="width: 13rem"
-        *ngFor="let card of players.cards; let indiceTwo = index"
+        *ngFor="let card of gam.cards"
       >
-        <h4 class="text-center text-white fw-bold">{{ card }}</h4>
+        <h4 class="text-center text-white fw-bold">
+          {{ card.card.nameOfCard }}
+        </h4>
         <div class="card-body">
           <img src="{{ card.card.urlImage }}" class="w-100 h-100" />
         </div>

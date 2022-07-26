@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Game } from 'src/app/interface/Prueba';
+import { Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 
 
@@ -13,6 +13,7 @@ import { GameService } from 'src/app/service/game.service';
 export class GameBoardComponent implements OnInit, OnChanges {
 
   game: Game[] = [];
+  cardsPlayer: Player[] = []
   suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
@@ -22,7 +23,7 @@ export class GameBoardComponent implements OnInit, OnChanges {
   }
   ngOnInit(): void {
     this.getGameById();
-    console.log("first")
+    this.getCardsPlayer();
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.getGameById();
@@ -33,7 +34,13 @@ export class GameBoardComponent implements OnInit, OnChanges {
     const idReceipt = this.router.snapshot.params['id']
     this.gameService.getGameById(idReceipt).subscribe((res) => {
       this.game.push(res);
+      res.players.filter(player => player.playerId === localStorage.getItem("id") ? this.cardsPlayer.push(player) : console.log("error"))
+
     });
+  }
+
+
+  getCardsPlayer(): void {
 
   }
 
