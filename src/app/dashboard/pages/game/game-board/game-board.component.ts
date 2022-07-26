@@ -15,7 +15,10 @@ export class GameBoardComponent implements OnInit, OnChanges {
   game: Game[] = [];
   cardsPlayer: Player[] = []
   cardsBoard: any[] = []
+<<<<<<< HEAD
   map = new Map();
+=======
+>>>>>>> 13ca8b1b794d923cfcf52111a5546c3b6312cb50
   suscribcion!: Subscription;
 
   constructor(private gameService: GameService, private router: ActivatedRoute) {
@@ -60,10 +63,8 @@ export class GameBoardComponent implements OnInit, OnChanges {
   }
 
   getBoard(res: Game): void {
-    this.cardsBoard[0] = res.board.cardsInGame;
-    this.cardsBoard.forEach((element, index) => {
-      this.map.set(index, element)
-    });
-    console.log(this.map)
+    console.log(res);
+    this.cardsBoard[0] = (res.board.cardsInGame);
+    console.log(this.cardsBoard)
   }
 }
