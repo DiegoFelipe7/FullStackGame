@@ -20,64 +20,20 @@
   <div class="col-9 marvel" style="height: 820px">
     <div class="d-flex justify-content-center align-content-center"></div>
   </div>
-  <div class="col-2 shadow" style="height: 820px">
-    <h4 class="text-center fw-bold">Mazo de Diego</h4>
-    <div class="scroll">
-      <div class="card bg-dark" style="width: 13rem">
-        <h4 class="text-center text-white fw-bold">Batman</h4>
+  <div class="col-2 shadow" style="height: 820px" *ngFor="let gam of game">
+    
+    <div class="scroll" *ngFor="let players of gam.players; let indice = index">
+      <h4 class="text-center fw-bold">{{players.email}}</h4>
+      <div class="card bg-dark" style="width: 13rem" *ngFor="let card of players.cards ; let indiceTwo = index">
+        <h4 class="text-center text-white fw-bold">{{card}}</h4>
         <div class="card-body">
           <img
-            src="../../../../../assets/img/cards/10.jpg"
+            src="{{card.card.urlImage}}"
             class="w-100 h-100"
           />
         </div>
         <div class="card-footer text-center"></div>
-      </div>
-      <div class="card bg-dark mt-2" style="width: 13rem">
-        <h4 class="text-center text-white fw-bold">Batman</h4>
-        <div class="card-body">
-          <img
-            src="../../../../../assets/img/cards/10.jpg"
-            class="w-100 h-100"
-          />
-        </div>
-      </div>
-      <div class="card bg-dark mt-2" style="width: 13rem">
-        <h4 class="text-center text-white fw-bold">Batman</h4>
-        <div class="card-body">
-          <img
-            src="../../../../../assets/img/cards/10.jpg"
-            class="w-100 h-100"
-          />
-        </div>
-      </div>
-      <div class="card bg-dark mt-2" style="width: 13rem">
-        <h4 class="text-center text-white fw-bold">Batman</h4>
-        <div class="card-body">
-          <img
-            src="../../../../../assets/img/cards/10.jpg"
-            class="w-100 h-100"
-          />
-        </div>
-      </div>
-      <div class="card bg-dark mt-2" style="width: 13rem">
-        <h4 class="text-center text-white fw-bold">Batman</h4>
-        <div class="card-body">
-          <img
-            src="../../../../../assets/img/cards/10.jpg"
-            class="w-100 h-100"
-          />
-        </div>
-      </div>
-      <div class="card bg-dark mt-2" style="width: 13rem">
-        <h4 class="text-center text-white fw-bold">Batman</h4>
-        <div class="card-body">
-          <img
-            src="../../../../../assets/img/cards/10.jpg"
-            class="w-100 h-100"
-          />
-        </div>
-      </div>
+      </div> 
     </div>
   </div>
 </div>
