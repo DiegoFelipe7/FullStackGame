@@ -9,7 +9,8 @@ import { GameService } from 'src/app/service/game.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  games: Game[] = [];
+
+  @Input()games: Game[] = [];
   player: userLogin = {
     playerId: localStorage.getItem("id")!,
     email: localStorage.getItem("email")!
