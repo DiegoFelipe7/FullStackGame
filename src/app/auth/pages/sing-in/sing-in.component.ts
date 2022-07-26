@@ -32,7 +32,6 @@ export class SingInComponent implements OnInit {
   /**
    * Registro con google y inicio de sesion
    */
-
   registerGoogle() {
     this.authService.SingInGoogle().then(() => this.router.navigate(["/Dashboard/Cards"]).catch(() => Swal.fire('Ocurrió un error inesperado')));
   }
