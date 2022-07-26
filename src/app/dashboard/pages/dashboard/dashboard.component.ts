@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { userLogin } from 'src/app/interface/UserLogin';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
     email: localStorage.getItem("email")!
   }
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private route: Router) {
 
   }
 
@@ -32,11 +33,7 @@ export class DashboardComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.authService.logout();
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        this.route.navigate(["/"])
       }
     })
   }
