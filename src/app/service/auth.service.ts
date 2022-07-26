@@ -47,9 +47,9 @@ export class AuthService {
       let res = await this.afAuth.signInWithPopup(
         new firebase.auth.GoogleAuthProvider()
       );
-      const player:userLogin ={
-        playerId:res.user?.uid!,
-        email:res.user?.email!
+      const player: userLogin = {
+        playerId: res.user?.uid!,
+        email: res.user?.email!
       }
       this.mongoRegister(player).subscribe();
     } catch (error) {
