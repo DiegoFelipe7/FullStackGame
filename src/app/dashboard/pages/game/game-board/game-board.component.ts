@@ -74,6 +74,10 @@ export class GameBoardComponent implements OnInit, OnChanges {
   getBoard(res: Game): void {
     console.log(res);
     this.cardsBoard[0] = (res.board.cardsInGame);
-    console.log(this.cardsBoard)
+    console.log(this.cardsBoard[0])
+   let  viewed:Boolean  = this.cardsBoard[0].some((element: { viewed: boolean; })=>element.viewed===true);
+   if(viewed){
+    this.gameService.winnerRound(res.id).subscribe((res)=>this.updateCards(res))
+   }
   }
 }
