@@ -9,7 +9,7 @@ import { GameService } from 'src/app/service/game.service';
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.css'],
 })
-export class GameBoardComponent implements OnInit, OnChanges {
+export class GameBoardComponent implements OnInit {
   game: Game[] = [];
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
@@ -27,10 +27,6 @@ export class GameBoardComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.getGameById();
     this.getCardsPlayer();
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getGameById();
-    console.log(changes);
   }
   /**
    * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
@@ -62,10 +58,10 @@ export class GameBoardComponent implements OnInit, OnChanges {
    */
 
   updateCards(res: Game): void {
-    res.players.filter((player) =>
+    res.players?.filter((player) =>
       player.playerId === localStorage.getItem('id')
         ? (this.cardsPlayer[0] = player)
-        : console.log('error')
+        : null
     );
     this.getBoard(res);
   }
@@ -74,29 +70,32 @@ export class GameBoardComponent implements OnInit, OnChanges {
    * @param res
    */
   getBoard(res: Game): void {
-    console.log(res);
     this.cardsBoard[0] = res.board.cardsInGame;
-    console.log(this.cardsBoard[0]);
     setTimeout(() => {
       this.selectRoundWinner(res);
     }, 6000);
   }
 
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard[0].some(
+    let viewed: Boolean = this.cardsBoard[0]?.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res)=>{
-         this.verifyPlayersLosed(res)
+         this.updateCards(res)
+         console.log(res)
+         setTimeout(() => {
+          this.verifyPlayersLosed(res);
+         }, 2000);
+
         })
     }
+
   }
 
   verifyPlayersLosed(res: Game) {
     this.gameService.verifyPlayersLosed(res.id).subscribe(res=>{
       console.log(res)
-      this.updateCards(res)
     })
   }
 }
