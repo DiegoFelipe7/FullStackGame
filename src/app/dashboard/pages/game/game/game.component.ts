@@ -10,9 +10,10 @@ import { GameService } from 'src/app/service/game.service';
 })
 export class GameComponent implements OnInit {
 
-  @Input()games: Game[] = [];
+  @Input() games: Game[] = [];
   player: userLogin = {
     playerId: localStorage.getItem("id")!,
+    name: localStorage.getItem("name")!,
     email: localStorage.getItem("email")!
   }
   constructor(private gameService: GameService, private router: Router) { }
