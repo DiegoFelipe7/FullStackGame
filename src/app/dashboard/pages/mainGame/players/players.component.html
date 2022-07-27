@@ -1,0 +1,14 @@
+<div style="border: 2px solid#fff" *ngFor="let player of gamePlayers">
+  <div
+    class="text-center mt-2"
+    *ngFor="let players of player.players; let indice = index"
+  >
+    <p class="fw-bold fs-5">{{ player.players[indice].email.slice(0, 6) }}</p>
+    <img
+      src="../../../../../assets/img/game/{{ indice + 1 }}.png"
+      class="rounded mx-auto d-block bg-danger rounded-5"
+      style="width: 80px"
+      alt="..."
+    />
+  </div>
+</div>

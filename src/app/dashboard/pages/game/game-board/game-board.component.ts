@@ -13,6 +13,7 @@ export class GameBoardComponent implements OnInit {
   game: Game[] = [];
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
+
   count: number = 0;
   suscribcion!: Subscription;
   img: string = '../../../../../assets/img/game/vacio.png';
@@ -39,7 +40,7 @@ export class GameBoardComponent implements OnInit {
     });
   }
 
-  getCardsPlayer(): void {}
+  getCardsPlayer(): void { }
   /**
    * Metodo para enviar una carta al tablero
    * @param cardId
@@ -84,7 +85,7 @@ export class GameBoardComponent implements OnInit {
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
         console.log(res);
-          this.verifyPlayersLosed(res);
+        this.verifyPlayersLosed(res);
 
       });
     }
@@ -93,9 +94,9 @@ export class GameBoardComponent implements OnInit {
   verifyPlayersLosed(res: Game) {
     console.log(res)
     this.gameService.verifyPlayersLosed(res.id).subscribe((res) => {
-    //  if(this.game[0].players.length>res.players.length){
-        this.updateCards(res)
-        console.log(res);
+      //  if(this.game[0].players.length>res.players.length){
+      this.updateCards(res)
+      console.log(res);
       //}
 
     });

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class DashboardComponent implements OnInit {
   player: userLogin = {
     playerId: localStorage.getItem("id")!,
+    name: localStorage.getItem("name")!,
     email: localStorage.getItem("email")!
   }
 
