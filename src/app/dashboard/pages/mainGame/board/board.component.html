@@ -1,0 +1,24 @@
+<div class="col-9 marvel" style="height: 820px" *ngFor="let item of cardsBoard">
+  <div
+    class="row align-content-center scroll"
+    *ngFor="let cardIngame of cardsBoard"
+  >
+    <div class="col-4" *ngFor="let card of cardIngame">
+      <div class="card bg-dark shadow mt-2 w-75" style="width: 10rem">
+        <h4 class="text-center text-white fw-bold" *ngIf="card.viewed">
+          {{ card.card.nameOfCard }}
+        </h4>
+        <p class="text-center text-white fs-5" *ngIf="card.viewed">
+          {{ card.card.power }}
+        </p>
+        <div class="card-body">
+          <img
+            src="{{ card.viewed === false ? img : card.card.urlImage }}"
+            class="w-100"
+            style="border: 1px solid#fff"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

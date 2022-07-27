@@ -1,0 +1,28 @@
+<h4 class="text-center fw-bold"></h4>
+<div class="scroll" *ngFor="let cards of cardsPlayer">
+  <div
+    class="card bg-dark mt-2"
+    style="width: 13rem 14rem"
+    *ngFor="let card of cards.cards"
+  >
+    <h4 class="text-center text-white fw-bold">
+      {{ card.card.nameOfCard }}
+    </h4>
+    <p class="text-center text-white fs-5">Power: {{ card.card.power }}</p>
+    <div class="card-body">
+      <img
+        src="{{ card.card.urlImage }}"
+        class="w-100 h-100"
+        style="border: 1px solid#fff"
+      />
+    </div>
+    <div class="card-footer text-center">
+      <button
+        class="rounded-3 btn btn-light fw-bold"
+        (click)="betCard(card.card.cardId, cards.playerId)"
+      >
+        Apostar carta
+      </button>
+    </div>
+  </div>
+</div>

@@ -29,7 +29,6 @@ export class AuthService {
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        console.log(user)
         localStorage.setItem('id', user.uid!);
         localStorage.setItem('email', user.email!);
       } else {

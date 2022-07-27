@@ -1,0 +1,8 @@
+.marvel {
+  background-image: url("../../../../../assets/img/game/29568.jpg");
+}
+.scroll {
+  height: 800px;
+  border: 1px solid #ddd;
+  overflow-y: scroll;
+}

@@ -5,6 +5,7 @@ import { CreateGameComponent } from './pages/game/create-game/create-game.compon
 import { GameBoardComponent } from './pages/game/game-board/game-board.component';
 import { GameComponent } from './pages/game/game/game.component';
 import { CardsHerosComponent } from './pages/ListCards/cards-heros/cards-heros.component';
+import { MarvelGameComponent } from './pages/mainGame/marvel-game/marvel-game.component';
 const routes: Routes = [
   {
     path: '', component: DashboardComponent,
@@ -12,7 +13,7 @@ const routes: Routes = [
       [
         { path: 'CreateGame', component: CreateGameComponent },
         { path: 'Game', component: GameComponent },
-        { path: "GameBoard/:id", component: GameBoardComponent },
+        { path: "GameBoard/:id", component: MarvelGameComponent },
         { path: 'Cards', component: CardsHerosComponent },
         { path: '**', redirectTo: 'CreateGame' }
       ]

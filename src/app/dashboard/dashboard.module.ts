@@ -13,6 +13,10 @@ import { GameComponent } from './pages/game/game/game.component';
 import { GameBoardComponent } from './pages/game/game-board/game-board.component';
 import { CreateGameComponent } from './pages/game/create-game/create-game.component';
 import { SidebarComponent } from './pages/shared/sidebar/sidebar.component';
+import { BoardComponent } from './pages/mainGame/board/board.component';
+import { PlayersComponent } from './pages/mainGame/players/players.component';
+import { CardsInGameComponent } from './pages/mainGame/cards-in-game/cards-in-game.component';
+import { MarvelGameComponent } from './pages/mainGame/marvel-game/marvel-game.component';
 
 
 
@@ -24,7 +28,11 @@ import { SidebarComponent } from './pages/shared/sidebar/sidebar.component';
     GameComponent,
     GameBoardComponent,
     CreateGameComponent,
-    SidebarComponent
+    SidebarComponent,
+    BoardComponent,
+    PlayersComponent,
+    CardsInGameComponent,
+    MarvelGameComponent
   ],
   imports: [
     CommonModule,
