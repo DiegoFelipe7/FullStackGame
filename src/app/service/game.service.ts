@@ -65,8 +65,13 @@ export class GameService {
     return this.http.post<Game>(url, this.httpOptions);
   }
 
-  winnerRound(gameId:String):Observable<Game>{
+  winnerRound(gameId:string):Observable<Game>{
     const url=`${this.url}/selectroundwinner/${gameId}`
+    return this.http.post<Game>(url,this.httpOptions)
+  }
+
+  verifyPlayersLosed(gameId:string):Observable<Game>{
+    const url =`${this.url}/verifyplayerslosed/${gameId}`
     return this.http.post<Game>(url,this.httpOptions)
   }
 }
