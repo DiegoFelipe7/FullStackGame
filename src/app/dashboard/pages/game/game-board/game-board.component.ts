@@ -74,7 +74,7 @@ export class GameBoardComponent implements OnInit {
     this.cardsBoard[0] = res.board.cardsInGame;
     setTimeout(() => {
       this.selectRoundWinner(res);
-    }, 6000);
+    }, 2000);
   }
 
   selectRoundWinner(res: Game) {
@@ -83,20 +83,22 @@ export class GameBoardComponent implements OnInit {
     );
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res) => {
-        this.updateCards(res)
-        console.log(res)
-        setTimeout(() => {
-          this.verifyPlayersLosed(res);
-        }, 2000);
+        this.updateCards(res);
+        console.log(res);
+        this.verifyPlayersLosed(res);
 
-      })
+      });
     }
-
   }
 
   verifyPlayersLosed(res: Game) {
-    this.gameService.verifyPlayersLosed(res.id).subscribe(res => {
-      console.log(res)
-    })
+    console.log(res)
+    this.gameService.verifyPlayersLosed(res.id).subscribe((res) => {
+      //  if(this.game[0].players.length>res.players.length){
+      this.updateCards(res)
+      console.log(res);
+      //}
+
+    });
   }
 }
