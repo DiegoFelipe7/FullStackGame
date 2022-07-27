@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CardsHerosComponent } from './pages/ListCards/cards-heros/cards-heros.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CardsComponent } from './pages/ListCards/cards/cards.component';
-//modulos 
+//modulos
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GameComponent } from './pages/game/game/game.component';
