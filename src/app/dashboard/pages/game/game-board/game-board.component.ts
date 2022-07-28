@@ -4,8 +4,11 @@ import { elementAt, Subscription } from 'rxjs';
 import { hola, Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
+<<<<<<< HEAD
 import { PlayersComponent } from '../../mainGame/players/players.component';
 import { RouterTestingModule } from '@angular/router/testing';
+=======
+>>>>>>> Diego
 
 @Component({
   selector: 'app-game-board',
@@ -32,7 +35,7 @@ export class GameBoardComponent implements OnInit {
   ngOnInit(): void {
     this.getGameById();
     this.getCardsPlayer();
-    console.log(this.cardsBoard);
+    console.log(this.cardsBoard)
   }
   /**
    * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
@@ -53,12 +56,18 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    //this.verifyBetCardOnTheBoard()? Swal.fire('Ya apostaste una Carta , no joda'):
-    this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
-      this.game[0] = res;
-      this.updateCards(res);
-      this.betIsViewed = false;
-    });
+    this.cardsBoard.forEach((element, index) => {
+      if (element[index]?.playerId === localStorage.getItem("id")) {
+        Swal.fire('Ya apostaste una carta en esta ronda')
+        return;
+      }
+      this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
+        this.game[0] = res;
+        this.updateCards(res);
+      });
+
+    })
+    /*  });*/
   }
   //verifyBetCardOnTheBoard():Boolean{
     //console.log(this.cardsBoard.forEach((c) => c)).
