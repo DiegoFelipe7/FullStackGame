@@ -1,7 +1,12 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
-import { Game, Player } from 'src/app/interface/Prueba';
+import {
+  hola,
+  Game,
+  Player,
+  CardInGame,
+} from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 
@@ -89,7 +94,7 @@ export class GameBoardComponent implements OnInit {
     console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
-    }, 2000);
+    }, 5000);
   }
   /**
    * Metodo para determinar el ganador de la ronda y cambio de estado de cartas en el board
