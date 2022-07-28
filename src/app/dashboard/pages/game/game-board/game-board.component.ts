@@ -1,9 +1,20 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
-import { hola, Game, Player } from 'src/app/interface/Prueba';
+import {
+  hola,
+  Game,
+  Player,
+  CardsInGame,
+  CardInGame,
+} from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
+<<<<<<< HEAD
+=======
+import { PlayersComponent } from '../../mainGame/players/players.component';
+import { RouterTestingModule } from '@angular/router/testing';
+>>>>>>> Erick
 
 @Component({
   selector: 'app-game-board',
@@ -14,8 +25,7 @@ export class GameBoardComponent implements OnInit {
   game: Game[] = [];
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
-
-
+  betIsViewed: boolean = true;
   count: number = 0;
   suscribcion!: Subscription;
   img: string = '../../../../../assets/img/game/vacio.png';
@@ -30,7 +40,7 @@ export class GameBoardComponent implements OnInit {
   ngOnInit(): void {
     this.getGameById();
     this.getCardsPlayer();
-    console.log(this.cardsBoard)
+    console.log(this.cardsBoard);
   }
   /**
    * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
@@ -42,7 +52,6 @@ export class GameBoardComponent implements OnInit {
       this.updateCards(res);
     });
   }
-
   getCardsPlayer(): void { }
   /**
    * Metodo para enviar una carta al tablero
@@ -50,7 +59,21 @@ export class GameBoardComponent implements OnInit {
    * @param playerId
    */
   betCard(cardId: string, playerId: string): void {
+    const idReceipt = this.router.snapshot.params['id'];
+    let beted: Boolean = this.cardsBoard[0].some(
+      (element: any) => element.playerId == playerId
+    );
 
+    if (beted) {
+      this.betIsViewed = false;
+      Swal.fire("Ya apostaste en esta ronda, no puedes apostar nuevamente")
+    } else {
+      this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
+        this.game[0] = res;
+        this.updateCards(res);
+        this.betIsViewed = false;
+      });
+    }
   }
 
   /**
@@ -71,7 +94,9 @@ export class GameBoardComponent implements OnInit {
    * @param res
    */
   getBoard(res: Game): void {
+    console.log(res);
     this.cardsBoard[0] = res.board.cardsInGame;
+    console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
     }, 2000);
@@ -81,11 +106,10 @@ export class GameBoardComponent implements OnInit {
    * @param res 
    */
   selectRoundWinner(res: Game) {
-
-    let viewed: Boolean = this.cardsBoard[0]?.some(
+    let viewed: Boolean = this.cardsBoard[0].some(
       (element: { viewed: boolean }) => element.viewed === true
     );
-    this.showWinnerCard()
+    console.log(viewed);
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
@@ -105,13 +129,12 @@ export class GameBoardComponent implements OnInit {
   }
 
   verifyPlayersLosed(res: Game) {
-    console.log(res)
+    console.log(res);
     this.gameService.verifyPlayersLosed(res.id).subscribe((res) => {
       //  if(this.game[0].players.length>res.players.length){
-      this.updateCards(res)
+      this.updateCards(res);
       console.log(res);
       //}
-
     });
   }
 }
