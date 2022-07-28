@@ -74,4 +74,9 @@ export class GameService {
     const url =`${this.url}/verifyplayerslosed/${gameId}`
     return this.http.post<Game>(url,this.httpOptions)
   }
+
+  surrenderPlayer(gameId:string,playerId:string):Observable<Game>{
+    const url = `${this.url}/${gameId}/player/${playerId}`
+    return this.http.post<Game>(url,this.httpOptions)
+  }
 }
