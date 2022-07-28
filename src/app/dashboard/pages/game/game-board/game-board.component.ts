@@ -24,6 +24,7 @@ export class GameBoardComponent implements OnInit {
   count: number = 0;
   suscribcion!: Subscription;
   img: string = '../../../../../assets/img/game/vacio.png';
+  cardWinner!: any;
   constructor(
     private gameService: GameService,
     private router: ActivatedRoute
@@ -89,7 +90,9 @@ export class GameBoardComponent implements OnInit {
    * @param res
    */
   getBoard(res: Game): void {
+    console.log(res);
     this.cardsBoard[0] = res.board.cardsInGame;
+    console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
     }, 2000);
@@ -102,7 +105,7 @@ export class GameBoardComponent implements OnInit {
     let viewed: Boolean = this.cardsBoard[0].some(
       (element: { viewed: boolean }) => element.viewed === true
     );
-    this.showWinnerCard();
+    console.log(viewed);
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
@@ -111,8 +114,6 @@ export class GameBoardComponent implements OnInit {
     }
   }
 
-  showWinnerCard() {
-  }
 
   verifyPlayersLosed(res: Game) {
     console.log(res);
@@ -122,5 +123,28 @@ export class GameBoardComponent implements OnInit {
       console.log(res);
       //}
     });
+  }
+
+  showWinnerCard(): void {
+    let scoreCaptured = 0;
+
+
+    this.cardsBoard[0].forEach((element: { card: any; }) => {
+
+      if (element.card.power > scoreCaptured) {
+        scoreCaptured = element.card.power;
+        this.cardWinner = element
+      }
+
+    });
+
+    Swal.fire({
+      title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard}`,
+      imageUrl: `../${this.cardWinner.card.urlImage}`,
+      imageHeight: 400,
+      imageWidth: 300,
+      text: `Power: ${this.cardWinner.card.power} `,
+      imageAlt: 'Error cargando la imagen'
+    })
   }
 }
