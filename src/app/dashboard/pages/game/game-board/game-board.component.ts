@@ -1,13 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
-import {
-  hola,
-  Game,
-  Player,
-  CardsInGame,
-  CardInGame,
-} from 'src/app/interface/Prueba';
+import { Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 
