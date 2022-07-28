@@ -15,6 +15,7 @@ export class GameBoardComponent implements OnInit {
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
 
+
   count: number = 0;
   suscribcion!: Subscription;
   img: string = '../../../../../assets/img/game/vacio.png';
@@ -49,20 +50,9 @@ export class GameBoardComponent implements OnInit {
    * @param playerId
    */
   betCard(cardId: string, playerId: string): void {
-    const idReceipt = this.router.snapshot.params['id'];
-    this.cardsBoard.forEach((element, index) => {
-      if (element[index]?.playerId === localStorage.getItem("id")) {
-        Swal.fire('Ya apostaste una carta en esta ronda')
-        return;
-      }
-      this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
-        this.game[0] = res;
-        this.updateCards(res);
-      });
 
-    })
-    /*  });*/
   }
+
   /**
    * Metodo para filtrar las cartas que pertenecen al usuario que inicio sesion
    * @param res
@@ -86,19 +76,32 @@ export class GameBoardComponent implements OnInit {
       this.selectRoundWinner(res);
     }, 2000);
   }
-
+  /**
+   * Metodo para determinar el ganador de la ronda y cambio de estado de cartas en el board
+   * @param res 
+   */
   selectRoundWinner(res: Game) {
+
     let viewed: Boolean = this.cardsBoard[0]?.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
+    this.showWinnerCard()
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
-        console.log(res);
         this.verifyPlayersLosed(res);
-
       });
     }
+  }
+
+  showWinnerCard() {
+    this.cardsBoard.forEach((element, index) => {
+      let valor = 0;
+      console.log(element[index]?.card.power)
+      /* if (element[index].card.power) {
+   
+       }*/
+    })
   }
 
   verifyPlayersLosed(res: Game) {
