@@ -57,7 +57,7 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    let beted: Boolean = this.cardsBoard[0].some(
+    let beted: Boolean = this.cardsBoard[0]?.some(
       (element: any) => element.playerId == playerId
     );
 
@@ -95,11 +95,11 @@ export class GameBoardComponent implements OnInit {
     console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
-    }, 2000);
+    }, 5000);
   }
 
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard[0].some(
+    let viewed: Boolean = this.cardsBoard[0]?.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
     console.log(viewed);
