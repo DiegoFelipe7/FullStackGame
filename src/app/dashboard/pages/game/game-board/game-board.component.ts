@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
 import { hola, Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-game-board',
@@ -28,6 +29,7 @@ export class GameBoardComponent implements OnInit {
   ngOnInit(): void {
     this.getGameById();
     this.getCardsPlayer();
+    console.log(this.cardsBoard)
   }
   /**
    * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
@@ -48,10 +50,18 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
-      this.game[0] = res;
-      this.updateCards(res);
-    });
+    this.cardsBoard.forEach((element, index) => {
+      if (element[index]?.playerId === localStorage.getItem("id")) {
+        Swal.fire('Ya apostaste una carta en esta ronda')
+        return;
+      }
+      this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
+        this.game[0] = res;
+        this.updateCards(res);
+      });
+
+    })
+    /*  });*/
   }
   /**
    * Metodo para filtrar las cartas que pertenecen al usuario que inicio sesion
