@@ -89,9 +89,7 @@ export class GameBoardComponent implements OnInit {
    * @param res
    */
   getBoard(res: Game): void {
-    console.log(res);
     this.cardsBoard[0] = res.board.cardsInGame;
-    console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
     }, 2000);
@@ -104,7 +102,7 @@ export class GameBoardComponent implements OnInit {
     let viewed: Boolean = this.cardsBoard[0].some(
       (element: { viewed: boolean }) => element.viewed === true
     );
-    console.log(viewed);
+    this.showWinnerCard();
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
@@ -114,13 +112,6 @@ export class GameBoardComponent implements OnInit {
   }
 
   showWinnerCard() {
-    this.cardsBoard.forEach((element, index) => {
-      let valor = 0;
-      console.log(element[index]?.card.power)
-      /* if (element[index].card.power) {
-   
-       }*/
-    })
   }
 
   verifyPlayersLosed(res: Game) {
