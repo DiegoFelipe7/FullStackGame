@@ -53,9 +53,10 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    this.verifyBetCardOnTheBoard()
-      ? Swal.fire('NO PUEDE APOSTAR CARTAS')
-      : this.gameService
+    // this.verifyBetCardOnTheBoard().includes(localStorage.getItem("id"))
+    //   ? Swal.fire('NO PUEDE APOSTAR CARTAS')
+      //:
+      this.gameService
           .betCard(cardId, playerId, idReceipt)
           .subscribe((res) => {
             this.game[0] = res;
@@ -63,9 +64,9 @@ export class GameBoardComponent implements OnInit {
             this.betIsViewed = false;
           });
   }
-  verifyBetCardOnTheBoard(){
-    return this.cardsBoard[0]?.some((element: { playerId: any }) => {
-      element.playerId==localStorage.getItem("id");
+  verifyBetCardOnTheBoard():any[]{
+    return this.cardsBoard[0]?.filter((element: { playerId: any }) => {
+      element.playerId==localStorage.getItem("id")?element.playerId:null
     });
   }
 
