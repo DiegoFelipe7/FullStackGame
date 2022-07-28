@@ -45,7 +45,7 @@ export class GameBoardComponent implements OnInit {
     });
   }
 
-  getCardsPlayer(): void { }
+  getCardsPlayer(): void {}
   /**
    * Metodo para enviar una carta al tablero
    * @param cardId
@@ -53,19 +53,21 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    //this.verifyBetCardOnTheBoard()? Swal.fire('Ya apostaste una Carta , no joda'):
-    this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
-      this.game[0] = res;
-      this.updateCards(res);
-      this.betIsViewed = false;
+    this.verifyBetCardOnTheBoard()
+      ? Swal.fire('NO PUEDE APOSTAR CARTAS')
+      : this.gameService
+          .betCard(cardId, playerId, idReceipt)
+          .subscribe((res) => {
+            this.game[0] = res;
+            this.updateCards(res);
+            this.betIsViewed = false;
+          });
+  }
+  verifyBetCardOnTheBoard(){
+    return this.cardsBoard[0]?.some((element: { playerId: any }) => {
+      element.playerId==localStorage.getItem("id");
     });
   }
-  //verifyBetCardOnTheBoard():Boolean{
-    //console.log(this.cardsBoard.forEach((c) => c)).
-    //return this.cardsBoard.map((c) => c).some(c => c.playerId == localStorage.getItem('id'))
-    
-  //}
-
 
   /**
    * Metodo para filtrar las cartas que pertenecen al usuario que inicio sesion
@@ -85,7 +87,8 @@ export class GameBoardComponent implements OnInit {
    * @param res
    */
   getBoard(res: Game): void {
-    this.cardsBoard = this.cardsBoard.concat(res.board.cardsInGame);
+    console.log(res);
+    this.cardsBoard[0] = res.board.cardsInGame;
     console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
@@ -93,7 +96,7 @@ export class GameBoardComponent implements OnInit {
   }
 
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard[0]?.some(
+    let viewed: Boolean = this.cardsBoard.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
     if (viewed) {
@@ -101,22 +104,17 @@ export class GameBoardComponent implements OnInit {
         this.updateCards(res);
         console.log(res);
         this.verifyPlayersLosed(res);
-        
-
-      })
+      });
     }
   }
 
   verifyPlayersLosed(res: Game) {
-    console.log(res)
+    console.log(res);
     this.gameService.verifyPlayersLosed(res.id).subscribe((res) => {
       //  if(this.game[0].players.length>res.players.length){
-      this.updateCards(res)
+      this.updateCards(res);
       console.log(res);
       //}
-
     });
   }
-
-  
 }
