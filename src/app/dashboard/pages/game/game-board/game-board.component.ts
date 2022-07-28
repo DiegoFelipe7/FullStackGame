@@ -139,13 +139,26 @@ export class GameBoardComponent implements OnInit {
       }
 
     });
-    console.log(`${this.cardWinner.card.nameOfCard}`)
+
+
+    console.log(`${this.cardWinner.card.power}`);
     Swal.fire({
-      title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard} con un poder de: ${this.cardWinner.card.power} `,
+      title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard}`,
       imageUrl: `../${this.cardWinner.card.urlImage}`,
-      imageHeight: 300,
+      imageHeight: 400,
+      imageWidth: 300,
+      text: `Power: ${this.cardWinner.card.power} `,
       imageAlt: 'Error cargando la imagen'
     })
+
+
+    //console.log(`${this.cardWinner.card.nameOfCard}`)
+    //Swal.fire({
+      //title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard} Poder: ${this.cardWinner.card.power} `,
+      //imageUrl: `../${this.cardWinner.card.urlImage}`,
+      //imageHeight: 400,
+      //imageAlt: 'Error cargando la imagen'
+    //})
     
   }
 
