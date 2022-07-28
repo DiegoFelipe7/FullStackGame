@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
 import { hola, Game, Player } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
+import Swal from 'sweetalert2';
+import { PlayersComponent } from '../../mainGame/players/players.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
   selector: 'app-game-board',
@@ -13,6 +16,7 @@ export class GameBoardComponent implements OnInit {
   game: Game[] = [];
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
+  betIsViewed: boolean = true;
 
   count: number = 0;
   suscribcion!: Subscription;
@@ -28,6 +32,7 @@ export class GameBoardComponent implements OnInit {
   ngOnInit(): void {
     this.getGameById();
     this.getCardsPlayer();
+    console.log(this.cardsBoard);
   }
   /**
    * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
@@ -48,11 +53,20 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
+    //this.verifyBetCardOnTheBoard()? Swal.fire('Ya apostaste una Carta , no joda'):
     this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
       this.game[0] = res;
       this.updateCards(res);
+      this.betIsViewed = false;
     });
   }
+  //verifyBetCardOnTheBoard():Boolean{
+    //console.log(this.cardsBoard.forEach((c) => c)).
+    //return this.cardsBoard.map((c) => c).some(c => c.playerId == localStorage.getItem('id'))
+    
+  //}
+
+
   /**
    * Metodo para filtrar las cartas que pertenecen al usuario que inicio sesion
    * @param res
@@ -71,7 +85,8 @@ export class GameBoardComponent implements OnInit {
    * @param res
    */
   getBoard(res: Game): void {
-    this.cardsBoard[0] = res.board.cardsInGame;
+    this.cardsBoard = this.cardsBoard.concat(res.board.cardsInGame);
+    console.log(this.cardsBoard);
     setTimeout(() => {
       this.selectRoundWinner(res);
     }, 2000);
@@ -86,8 +101,9 @@ export class GameBoardComponent implements OnInit {
         this.updateCards(res);
         console.log(res);
         this.verifyPlayersLosed(res);
+        
 
-      });
+      })
     }
   }
 
@@ -101,4 +117,6 @@ export class GameBoardComponent implements OnInit {
 
     });
   }
+
+  
 }
