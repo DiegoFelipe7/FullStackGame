@@ -5,7 +5,7 @@ import {
   hola,
   Game,
   Player,
- 
+
   CardInGame,
 } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
@@ -129,8 +129,8 @@ export class GameBoardComponent implements OnInit {
 
   showWinnerCard(): void {
   let scoreCaptured = 0;
-  
-  
+
+
     this.cardsBoard[0].forEach((element: { card: any; } ) => {
 
       if (element.card.power > scoreCaptured) {
