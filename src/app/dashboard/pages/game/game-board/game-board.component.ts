@@ -145,11 +145,45 @@ export class GameBoardComponent implements OnInit {
   }
 
   surrenderPlayer(res: Game):void{
-    this.gameService
-      .surrenderPlayer(res.id, localStorage.getItem('id')!)
-      .subscribe((res) => {
-        console.log(res);
-        this.updateCards(res);
-      });
+    Swal.fire({
+      title: 'Estás seguro de retirarte del juego?',
+      text: "No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo retirarme!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.gameService
+        .surrenderPlayer(res.id, localStorage.getItem('id')!)
+        .subscribe((res) => {
+          console.log(res);
+          this.updateCards(res);
+          
+        });
+
+        Swal.fire(
+          
+          'Te has retirado!',
+          'No puedes jugar, pero si observar.',
+          'success'
+         
+        ) 
+        setTimeout(() => {
+        window.location.reload()
+        }, 3000);
+      }
+    })
+
+
+
+
+    // this.gameService
+    //   .surrenderPlayer(res.id, localStorage.getItem('id')!)
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //     this.updateCards(res);
+    //   });
   }
 }

@@ -18,8 +18,8 @@
     </div>
   </div>
   <div class="col-9 marvel" style="height: 820px">
-    <div>
-      <button type="button" class="btn btn-danger w-25 p-2">Danger</button>
+    <div *ngFor="let gam of game ">
+      <button id="buttonRendirse" type="button" class="btn btn-light w-25 p-2" (click)="surrenderPlayer(gam)">Rendirse</button>
     </div>
     <div
       class="row align-content-center scroll"
