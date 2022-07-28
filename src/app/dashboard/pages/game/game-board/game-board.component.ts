@@ -5,13 +5,14 @@ import {
   hola,
   Game,
   Player,
-  CardsInGame,
+ 
   CardInGame,
 } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 import { PlayersComponent } from '../../mainGame/players/players.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CardsInGame, Card } from '../../../../interface/Prueba';
 
 @Component({
   selector: 'app-game-board',
@@ -25,6 +26,8 @@ export class GameBoardComponent implements OnInit {
   betIsViewed: boolean =true;
   count: number = 0;
   suscribcion!: Subscription;
+  cardWinner!: any;
+
   img: string = '../../../../../assets/img/game/vacio.png';
   constructor(
     private gameService: GameService,
@@ -37,7 +40,7 @@ export class GameBoardComponent implements OnInit {
   ngOnInit(): void {
     this.getGameById();
     this.getCardsPlayer();
-    console.log(this.cardsBoard);
+    console.log(this.cardsBoard)
   }
   /**
    * Metodo para consultar un id por medio de el id del juego que se encuentra en la url
@@ -104,6 +107,7 @@ export class GameBoardComponent implements OnInit {
     );
     console.log(viewed);
     if (viewed) {
+      this.showWinnerCard()
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
         console.log(res);
@@ -121,4 +125,29 @@ export class GameBoardComponent implements OnInit {
       //}
     });
   }
+
+
+  showWinnerCard(): void {
+  let scoreCaptured = 0;
+  
+  
+    this.cardsBoard[0].forEach((element: { card: any; } ) => {
+
+      if (element.card.power > scoreCaptured) {
+        scoreCaptured = element.card.power;
+        this.cardWinner = element
+      }
+
+    });
+
+    Swal.fire({
+      title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard}`,
+      imageUrl: `../${this.cardWinner.card.urlImage}`,
+      imageHeight: 400,
+      imageWidth: 300,
+      text: `Power: ${this.cardWinner.card.power} `,
+      imageAlt: 'Error cargando la imagen'
+    })
+  }
+
 }
