@@ -13,7 +13,13 @@ export interface Board {
 }
 
 
-export interface CardsInGame {
+export interface CardsInGame{
+
+}
+export interface CardInGame {
+  playerId:string;
+  card:PrincipalMallet;
+  viewed:Boolean
 
 }
 
