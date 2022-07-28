@@ -1,7 +1,13 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
-import { hola, Game, Player } from 'src/app/interface/Prueba';
+import {
+  hola,
+  Game,
+  Player,
+  CardsInGame,
+  CardInGame,
+} from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 import { PlayersComponent } from '../../mainGame/players/players.component';
@@ -17,7 +23,6 @@ export class GameBoardComponent implements OnInit {
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
   betIsViewed: boolean = true;
-
   count: number = 0;
   suscribcion!: Subscription;
   img: string = '../../../../../assets/img/game/vacio.png';
@@ -44,7 +49,6 @@ export class GameBoardComponent implements OnInit {
       this.updateCards(res);
     });
   }
-
   getCardsPlayer(): void {}
   /**
    * Metodo para enviar una carta al tablero
@@ -53,23 +57,20 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    // this.verifyBetCardOnTheBoard().includes(localStorage.getItem("id"))
-    //   ? Swal.fire('NO PUEDE APOSTAR CARTAS')
-      //:
-      this.gameService
-          .betCard(cardId, playerId, idReceipt)
-          .subscribe((res) => {
-            this.game[0] = res;
-            this.updateCards(res);
-            this.betIsViewed = false;
-          });
-  }
-  verifyBetCardOnTheBoard():any[]{
-    return this.cardsBoard[0]?.filter((element: { playerId: any }) => {
-      element.playerId==localStorage.getItem("id")?element.playerId:null
-    });
-  }
+    let beted: Boolean = this.cardsBoard[0].some(
+      (element: any) => element.playerId == playerId
+    );
 
+    if (beted) {
+     Swal.fire("Ya apostaste en esta ronda, no puedes apostar nuevamente")
+    }else{
+      this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
+        this.game[0] = res;
+        this.updateCards(res);
+        this.betIsViewed = false;
+      });
+    }
+  }
   /**
    * Metodo para filtrar las cartas que pertenecen al usuario que inicio sesion
    * @param res
@@ -97,9 +98,10 @@ export class GameBoardComponent implements OnInit {
   }
 
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard.some(
+    let viewed: Boolean = this.cardsBoard[0].some(
       (element: { viewed: boolean }) => element.viewed === true
     );
+    console.log(viewed);
     if (viewed) {
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
