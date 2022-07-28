@@ -10,11 +10,6 @@ import {
 } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
-<<<<<<< HEAD
-=======
-import { PlayersComponent } from '../../mainGame/players/players.component';
-import { RouterTestingModule } from '@angular/router/testing';
->>>>>>> Erick
 
 @Component({
   selector: 'app-game-board',
