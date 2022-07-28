@@ -144,7 +144,7 @@ export class GameBoardComponent implements OnInit {
       title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard} con un poder de: ${this.cardWinner.card.power} `,
       imageUrl: `../${this.cardWinner.card.urlImage}`,
       imageHeight: 300,
-      imageAlt: 'Falla cargando la imagen chao Raul'
+      imageAlt: 'Error cargando la imagen'
     })
     
   }
