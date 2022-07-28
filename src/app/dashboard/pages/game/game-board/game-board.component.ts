@@ -5,13 +5,14 @@ import {
   hola,
   Game,
   Player,
-  CardsInGame,
+ 
   CardInGame,
 } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 import { PlayersComponent } from '../../mainGame/players/players.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CardsInGame, Card } from '../../../../interface/Prueba';
 
 @Component({
   selector: 'app-game-board',
@@ -25,6 +26,8 @@ export class GameBoardComponent implements OnInit {
   betIsViewed: boolean =true;
   count: number = 0;
   suscribcion!: Subscription;
+  cardWinner!: any;
+
   img: string = '../../../../../assets/img/game/vacio.png';
   constructor(
     private gameService: GameService,
@@ -57,7 +60,7 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    let beted: Boolean = this.cardsBoard[0].some(
+    let beted: Boolean = this.cardsBoard[0]?.some(
       (element: any) => element.playerId == playerId
     );
 
@@ -99,11 +102,12 @@ export class GameBoardComponent implements OnInit {
   }
 
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard[0].some(
+    let viewed: Boolean = this.cardsBoard[0]?.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
     console.log(viewed);
     if (viewed) {
+      this.showWinnerCard()
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
         console.log(res);
@@ -121,4 +125,28 @@ export class GameBoardComponent implements OnInit {
       //}
     });
   }
+
+
+  showWinnerCard(): void {
+  let scoreCaptured = 0;
+  
+  
+    this.cardsBoard[0].forEach((element: { card: any; } ) => {
+
+      if (element.card.power > scoreCaptured) {
+        scoreCaptured = element.card.power;
+        this.cardWinner = element
+      }
+
+    });
+    console.log(`${this.cardWinner.card.nameOfCard}`)
+    Swal.fire({
+      title: `Carta Ganadora: ${this.cardWinner.card.nameOfCard} con un poder de: ${this.cardWinner.card.power} `,
+      imageUrl: `../${this.cardWinner.card.urlImage}`,
+      imageHeight: 300,
+      imageAlt: 'Falla cargando la imagen chao Raul'
+    })
+    
+  }
+
 }
