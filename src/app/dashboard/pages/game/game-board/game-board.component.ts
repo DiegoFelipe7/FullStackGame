@@ -22,7 +22,7 @@ export class GameBoardComponent implements OnInit {
   game: Game[] = [];
   cardsPlayer: Player[] = [];
   cardsBoard: any[] = [];
-  betIsViewed: boolean = true;
+  betIsViewed: boolean =true;
   count: number = 0;
   suscribcion!: Subscription;
   img: string = '../../../../../assets/img/game/vacio.png';
@@ -62,6 +62,7 @@ export class GameBoardComponent implements OnInit {
     );
 
     if (beted) {
+      this.betIsViewed=false;
      Swal.fire("Ya apostaste en esta ronda, no puedes apostar nuevamente")
     }else{
       this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
