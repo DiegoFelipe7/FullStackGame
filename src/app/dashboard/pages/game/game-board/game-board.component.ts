@@ -21,7 +21,7 @@ export class GameBoardComponent implements OnInit {
   cardWinner!: any;
   dateCreation!: Date;
   img: string = '../../../../../assets/img/game/vacio.png';
-  
+
   constructor(
     private gameService: GameService,
     private router: ActivatedRoute
@@ -63,7 +63,7 @@ export class GameBoardComponent implements OnInit {
     if (beted) {
       this.betIsViewed = false;
       Swal.fire('Ya apostaste en esta ronda, no puedes apostar nuevamente');
-      
+
     } else {
       this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
         this.game[0] = res;
@@ -149,6 +149,9 @@ export class GameBoardComponent implements OnInit {
       text: `Power: ${this.cardWinner.card.power} `,
       imageAlt: 'Error cargando la imagen',
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   surrenderPlayer(res: Game):void{
@@ -167,16 +170,17 @@ export class GameBoardComponent implements OnInit {
         .subscribe((res) => {
           console.log(res);
           this.updateCards(res);
-          
+          this.verifyPlayersLosed(res)
         });
 
         Swal.fire(
-          
+
           'Te has retirado!',
           'No puedes jugar, pero si observar.',
           'success'
-         
-        ) 
+
+        )
+
         setTimeout(() => {
         window.location.reload()
         }, 3000);
@@ -184,7 +188,7 @@ export class GameBoardComponent implements OnInit {
     })
   }
   startGame(res: Game) {
-    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 1.5 && !res.begined && res.players.length >= 2) {
+    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 0.3 && !res.begined && res.players.length >= 2) {
       this.gameService.startGame(res.id).subscribe(res => {
         this.updateCards(res)
       })
@@ -193,4 +197,4 @@ export class GameBoardComponent implements OnInit {
 }
 
 
-  
+
