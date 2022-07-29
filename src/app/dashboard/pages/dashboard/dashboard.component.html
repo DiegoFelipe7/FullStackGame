@@ -9,12 +9,14 @@
   <div class="col-10">
     <div class="col-12 bg-light shadow" style="height: 60px">
       <div class="row justify-content-end">
-        <div class="col-8">
+        <div class="col-6">
           <h1 class="fw-bold" style="margin-left: 20px">Inicio</h1>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-6 text-center">
           <div class="d-flex justify-content-between">
-            <h5 class="p-2 text-uppercase rounded">{{ player.email }}</h5>
+            <h4 class="p-2 text-uppercase rounded fw-bold">
+              Bienvenido: {{ player.name }} 👋
+            </h4>
             <button
               class="btn btn-danger p-2 mt-2 text-white fw-bold w-25"
               (click)="salida()"

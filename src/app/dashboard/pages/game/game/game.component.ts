@@ -14,7 +14,8 @@ export class GameComponent implements OnInit {
   player: userLogin = {
     playerId: localStorage.getItem("id")!,
     name: localStorage.getItem("name")!,
-    email: localStorage.getItem("email")!
+    email: localStorage.getItem("email")!,
+    globalScore: 0!
   }
   constructor(private gameService: GameService, private router: Router) { }
 

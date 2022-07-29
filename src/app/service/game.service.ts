@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
-import { Board, Game } from '../interface/Prueba';
+import { Board, Game, Player } from '../interface/Prueba';
 import { userLogin } from '../interface/UserLogin';
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ import { userLogin } from '../interface/UserLogin';
 export class GameService {
 
   private url = 'api/game';
+  private urlplayers = 'api/player';
   _refresh = new Subject<void>();
 
   httpOptions = {
@@ -65,13 +66,17 @@ export class GameService {
     return this.http.post<Game>(url, this.httpOptions);
   }
 
-  winnerRound(gameId:string):Observable<Game>{
-    const url=`${this.url}/selectroundwinner/${gameId}`
-    return this.http.post<Game>(url,this.httpOptions)
+  winnerRound(gameId: string): Observable<Game> {
+    const url = `${this.url}/selectroundwinner/${gameId}`
+    return this.http.post<Game>(url, this.httpOptions)
   }
 
-  verifyPlayersLosed(gameId:string):Observable<Game>{
-    const url =`${this.url}/verifyplayerslosed/${gameId}`
-    return this.http.post<Game>(url,this.httpOptions)
+  verifyPlayersLosed(gameId: string): Observable<Game> {
+    const url = `${this.url}/verifyplayerslosed/${gameId}`
+    return this.http.post<Game>(url, this.httpOptions)
+  }
+
+  getPlayers(): Observable<Player> {
+    return this.http.get<Player>(`${this.urlplayers}/ranking`)
   }
 }

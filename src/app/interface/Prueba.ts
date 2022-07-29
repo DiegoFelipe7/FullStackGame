@@ -13,13 +13,13 @@ export interface Board {
 }
 
 
-export interface CardsInGame{
+export interface CardsInGame {
 
 }
 export interface CardInGame {
-  playerId:string;
-  card:PrincipalMallet;
-  viewed:Boolean
+    playerId: string;
+    card: PrincipalMallet;
+    viewed: Boolean
 
 }
 
@@ -39,9 +39,10 @@ export interface PrincipalMallet {
 
 export interface Player {
     playerId: string;
+    name: string,
     email: string;
-    globalScore: number | null;
-    localScore: number | null;
+    globalScore: number;
+    localScore: number;
     cards: Card[];
 }
 

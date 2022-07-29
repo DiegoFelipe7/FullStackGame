@@ -6,6 +6,8 @@ import { GameBoardComponent } from './pages/game/game-board/game-board.component
 import { GameComponent } from './pages/game/game/game.component';
 import { CardsHerosComponent } from './pages/ListCards/cards-heros/cards-heros.component';
 import { MarvelGameComponent } from './pages/mainGame/marvel-game/marvel-game.component';
+import { RankingComponent } from './pages/playerRanking/ranking/ranking.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
 const routes: Routes = [
   {
     path: '', component: DashboardComponent,
@@ -15,6 +17,8 @@ const routes: Routes = [
         { path: 'Game', component: GameComponent },
         { path: "GameBoard/:id", component: GameBoardComponent },
         { path: 'Cards', component: CardsHerosComponent },
+        { path: "Ranking", component: RankingComponent },
+        { path: "Profile", component: ProfileComponent },
         { path: '**', redirectTo: 'CreateGame' }
       ]
   }
