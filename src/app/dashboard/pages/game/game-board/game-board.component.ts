@@ -44,6 +44,7 @@ export class GameBoardComponent implements OnInit {
       this.game.push(res);
       this.updateCards(res);
       this.dateCreation = new Date(res.creation)
+      console.log(this.dateCreation.getTime())
       console.log((Date.now() - this.dateCreation.getTime()) / 1000 / 60)
       this.startGame(res);
     });
@@ -191,7 +192,7 @@ export class GameBoardComponent implements OnInit {
     })
   }
   startGame(res: Game) {
-    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 0.3 && !res.begined && res.players.length >= 2) {
+    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 0.5 && !res.begined && res.players.length >= 2) {
       this.gameService.startGame(res.id).subscribe(res => {
         this.updateCards(res)
       })

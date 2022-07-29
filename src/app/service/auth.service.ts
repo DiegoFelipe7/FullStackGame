@@ -107,8 +107,8 @@ export class AuthService {
   }
   /**
    * Metodo para registrar un usuario en back mongo
-   * @param player 
-   * @returns 
+   * @param player
+   * @returns
    */
   mongoRegister(player: userLogin): Observable<userLogin> {
     return this.http.post<userLogin>(
@@ -170,7 +170,7 @@ export class AuthService {
   }
   /**
    * metodo para verificar si un usuario esta activo
-   * @returns 
+   * @returns
    */
   verifySession(): Observable<boolean> {
     const id = localStorage.getItem("id");
