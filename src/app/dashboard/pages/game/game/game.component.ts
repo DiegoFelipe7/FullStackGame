@@ -21,6 +21,8 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGame();
+    console.log(this.games)
+    console.log(this.games[0]?.players.length)
   }
   getGame(): void {
     this.gameService.getGame().subscribe(res => {
