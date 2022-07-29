@@ -1,16 +1,8 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
-<<<<<<< HEAD
 import { hola, Game, Player, CardInGame } from 'src/app/interface/Prueba';
-=======
-import {
-  hola,
-  Game,
-  Player,
-  CardInGame,
-} from 'src/app/interface/Prueba';
->>>>>>> Diego
+
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 
@@ -26,8 +18,10 @@ export class GameBoardComponent implements OnInit {
   betIsViewed: boolean = true;
   count: number = 0;
   suscribcion!: Subscription;
-  img: string = '../../../../../assets/img/game/vacio.png';
   cardWinner!: any;
+  dateCreation!: Date;
+  img: string = '../../../../../assets/img/game/vacio.png';
+  
   constructor(
     private gameService: GameService,
     private router: ActivatedRoute
@@ -49,6 +43,9 @@ export class GameBoardComponent implements OnInit {
     this.gameService.getGameById(idReceipt).subscribe((res) => {
       this.game.push(res);
       this.updateCards(res);
+      this.dateCreation = new Date(res.creation)
+      console.log((Date.now() - this.dateCreation.getTime()) / 1000 / 60)
+      this.startGame(res);
     });
   }
   getCardsPlayer(): void { }
@@ -65,11 +62,8 @@ export class GameBoardComponent implements OnInit {
 
     if (beted) {
       this.betIsViewed = false;
-<<<<<<< HEAD
       Swal.fire('Ya apostaste en esta ronda, no puedes apostar nuevamente');
-=======
-      Swal.fire("Ya apostaste en esta ronda, no puedes apostar nuevamente")
->>>>>>> Diego
+      
     } else {
       this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
         this.game[0] = res;
@@ -188,15 +182,15 @@ export class GameBoardComponent implements OnInit {
         }, 3000);
       }
     })
-
-
-
-
-    // this.gameService
-    //   .surrenderPlayer(res.id, localStorage.getItem('id')!)
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //     this.updateCards(res);
-    //   });
+  }
+  startGame(res: Game) {
+    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 1.5 && !res.begined && res.players.length >= 2) {
+      this.gameService.startGame(res.id).subscribe(res => {
+        this.updateCards(res)
+      })
+    }
   }
 }
+
+
+  

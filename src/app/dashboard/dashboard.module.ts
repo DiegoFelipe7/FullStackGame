@@ -17,6 +17,8 @@ import { BoardComponent } from './pages/mainGame/board/board.component';
 import { PlayersComponent } from './pages/mainGame/players/players.component';
 import { CardsInGameComponent } from './pages/mainGame/cards-in-game/cards-in-game.component';
 import { MarvelGameComponent } from './pages/mainGame/marvel-game/marvel-game.component';
+import { RankingComponent } from './pages/playerRanking/ranking/ranking.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
 
 
 
@@ -32,7 +34,9 @@ import { MarvelGameComponent } from './pages/mainGame/marvel-game/marvel-game.co
     BoardComponent,
     PlayersComponent,
     CardsInGameComponent,
-    MarvelGameComponent
+    MarvelGameComponent,
+    RankingComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

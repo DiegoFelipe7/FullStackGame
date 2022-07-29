@@ -1,5 +1,6 @@
 export interface userLogin {
     playerId: string,
     name: string,
-    email: string
+    email: string,
+    globalScore: Number
 }

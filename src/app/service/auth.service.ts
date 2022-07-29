@@ -52,7 +52,8 @@ export class AuthService {
       const player: userLogin = {
         playerId: res.user?.uid!,
         name: res.user?.displayName!,
-        email: res.user?.email!
+        email: res.user?.email!,
+        globalScore: 0
       }
       this.mongoRegister(player).subscribe();
       await this.SignUp(res.user?.uid!, res.user?.displayName!, res.user?.email!)
@@ -93,7 +94,8 @@ export class AuthService {
       const player: userLogin = {
         playerId: result.user?.uid!,
         name: name,
-        email: email
+        email: email,
+        globalScore: 0
       }
       this.mongoRegister(player).subscribe();
       await this.SetUserData(result.user, name);

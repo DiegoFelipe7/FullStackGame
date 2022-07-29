@@ -1,0 +1,28 @@
+<div class="container">
+  <h2 class="text-center p-2 border rounded-1 bg-dark text-white fw-bold">
+    Ranking De Jugadores
+  </h2>
+  <div class="row justify-content-around" *ngFor="let player of players">
+    <div
+      class="col-3 mt-5 shadow rounded-4 p-5"
+      style="height: 350px"
+      *ngFor="let player of player; let indice = index"
+    >
+      <h1 class="fw-bold text-black">
+        {{
+          indice + 1 === 1
+            ? "1 Puesto 🥇"
+            : indice != 2
+            ? "2 Puesto 🥈"
+            : "3 Puesto 🥉"
+        }}
+      </h1>
+      <hr class="w-75 bg-danger text-danger" />
+      <h2 class="fw-bold">{{ player.name }}</h2>
+      <h4 class="text-secondary mt-4 fw-bold">
+        Score {{ player.globalScore }}
+      </h4>
+      <h1 class="text-center mt-4"><i class="bi bi-controller"></i></h1>
+    </div>
+  </div>
+</div>
