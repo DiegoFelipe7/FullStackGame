@@ -21,6 +21,7 @@ export class GameBoardComponent implements OnInit {
   count: number = 0;
   suscribcion!: Subscription;
   cardWinner!: any;
+  dateCreation!:Date;
 
   img: string = '../../../../../assets/img/game/vacio.png';
   constructor(
@@ -44,6 +45,9 @@ export class GameBoardComponent implements OnInit {
     this.gameService.getGameById(idReceipt).subscribe((res) => {
       this.game.push(res);
       this.updateCards(res);
+      this.dateCreation=new Date(res.creation)
+      console.log((Date.now()-this.dateCreation.getTime())/1000/60)
+      this.startGame(res);
     });
   }
   getCardsPlayer(): void {}
@@ -151,5 +155,13 @@ export class GameBoardComponent implements OnInit {
         console.log(res);
         this.updateCards(res);
       });
+  }
+
+  startGame(res:Game){
+     if(((Date.now()-this.dateCreation.getTime())/1000/60)>=1.5 && !res.begined && res.players.length>=2){
+      this.gameService.startGame(res.id).subscribe(res=>{
+        this.updateCards(res)
+      })
+     }
   }
 }

@@ -4,17 +4,16 @@ import { Observable, Subject, tap } from 'rxjs';
 import { Board, Game } from '../interface/Prueba';
 import { userLogin } from '../interface/UserLogin';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameService {
-
   private url = 'api/game';
   _refresh = new Subject<void>();
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   /**
    * Peticion get para traer un juego
    * @returns games
@@ -29,12 +28,12 @@ export class GameService {
    */
 
   addPlayer(id: string, usuario: userLogin): Observable<userLogin> {
-    const url = `${this.url}/player/${id}`
+    const url = `${this.url}/player/${id}`;
     return this.http.post<userLogin>(url, usuario, this.httpOptions).pipe(
       tap(() => {
         this._refresh.next();
       })
-    );;
+    );
   }
   /**
    * Metodo para crear un juego y un tablero
@@ -51,7 +50,7 @@ export class GameService {
    * @returns
    */
   getGameById(id: string): Observable<Game> {
-    return this.http.get<Game>(`${this.url}/listgame/${id}`)
+    return this.http.get<Game>(`${this.url}/listgame/${id}`);
   }
   /**
    *  Metodo para enviar  una carta el tablero
@@ -61,22 +60,26 @@ export class GameService {
    * @returns
    */
   betCard(cardId: string, playerId: string, gameId: string): Observable<Game> {
-    const url = `${this.url}/${gameId}/betcard/${playerId}/card/${cardId}`
+    const url = `${this.url}/${gameId}/betcard/${playerId}/card/${cardId}`;
     return this.http.post<Game>(url, this.httpOptions);
   }
 
-  winnerRound(gameId:string):Observable<Game>{
-    const url=`${this.url}/selectroundwinner/${gameId}`
-    return this.http.post<Game>(url,this.httpOptions)
+  winnerRound(gameId: string): Observable<Game> {
+    const url = `${this.url}/selectroundwinner/${gameId}`;
+    return this.http.post<Game>(url, this.httpOptions);
   }
 
-  verifyPlayersLosed(gameId:string):Observable<Game>{
-    const url =`${this.url}/verifyplayerslosed/${gameId}`
-    return this.http.post<Game>(url,this.httpOptions)
+  verifyPlayersLosed(gameId: string): Observable<Game> {
+    const url = `${this.url}/verifyplayerslosed/${gameId}`;
+    return this.http.post<Game>(url, this.httpOptions);
   }
 
-  surrenderPlayer(gameId:string,playerId:string):Observable<Game>{
-    const url = `${this.url}/${gameId}/player/${playerId}`
-    return this.http.post<Game>(url,this.httpOptions)
+  surrenderPlayer(gameId: string, playerId: string): Observable<Game> {
+    const url = `${this.url}/${gameId}/player/${playerId}`;
+    return this.http.post<Game>(url, this.httpOptions);
+  }
+  startGame(gameId: string): Observable<Game> {
+    const url = `${this.url}/startgame/${gameId}`;
+    return this.http.post<Game>(url, this.httpOptions);
   }
 }
