@@ -1,4 +1,9 @@
-<form class="w-100 p-5" autocomplete="off">
+<form
+  (ngSubmit)="normalAuthentication(name.value, email.value, password.value)"
+  class="w-100 p-5"
+  autocomplete="off"
+  [formGroup]="singUp"
+>
   <h1 class="fw-bold text-black text-center mt-5">Registrarse</h1>
   <div class="mt-2">
     <label class="form-label fw-bold"> Nombre </label>
@@ -8,8 +13,11 @@
       name="name"
       id="name"
       #name
-      required
+      formControlName="name"
     />
+    <span class="form-text text-danger fs-6" *ngIf="fieldValidator('name')"
+      >El nombre es requerido!</span
+    >
   </div>
   <div class="mt-2">
     <label class="form-label fw-bold"> Correo </label>
@@ -20,7 +28,11 @@
       id="email"
       #email
       required
+      formControlName="email"
     />
+    <span class="form-text text-danger fs-6" *ngIf="fieldValidator('email')"
+      >El correo es invalido!</span
+    >
   </div>
 
   <div class="mt-2">
@@ -32,13 +44,17 @@
       id="password"
       #password
       required
+      formControlName="password"
     />
+    <span class="form-text text-danger fs-6" *ngIf="fieldValidator('email')"
+      >La contraseña debe tenera mas de 6 caracteres!</span
+    >
   </div>
   <div class="mt-2">
     <button
       class="btn btn-dark w-100 fw-bold"
-      type="button"
-      (click)="normalAuthentication(name.value, email.value, password.value)"
+      type="submit"
+      [disabled]="singUp.invalid"
     >
       <i class="bi bi-person-plus"></i>{{ " " }}Registrarse
     </button>

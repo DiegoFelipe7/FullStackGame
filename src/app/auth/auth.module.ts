@@ -4,6 +4,7 @@ import { SingInComponent } from './pages/sing-in/sing-in.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SingUpComponent } from './pages/sing-up/sing-up.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     SingInComponent,
@@ -12,6 +13,7 @@ import { AuthComponent } from './pages/auth/auth.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AuthRoutingModule
   ]
 })

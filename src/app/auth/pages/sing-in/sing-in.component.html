@@ -1,33 +1,44 @@
-<form class="w-100 p-5" autocomplete="off">
+<form
+  (ngSubmit)="login(email.value, password.value)"
+  class="w-100 p-5"
+  autocomplete="off"
+  [formGroup]="singIng"
+>
   <h1 class="fw-bold text-black text-center mt-5">Inicia sesion</h1>
   <div class="mt-2">
     <label class="form-label fw-bold"> Correo </label>
     <input
       type="email"
       class="form-control"
-      name="email"
       id="email"
+      name="email"
+      formControlName="email"
       #email
-      required
     />
+    <span class="form-text text-danger fs-6" *ngIf="fieldValidator('email')"
+      >El correo es invalido!</span
+    >
   </div>
 
   <div class="mt-2">
     <label class="form-label fw-bold"> Contraseña </label>
     <input
       type="password"
-      class="form-control"
-      name="password"
       id="password"
+      name="password"
+      class="form-control"
+      formControlName="password"
       #password
-      required
     />
+    <span class="form-text text-danger fs-6" *ngIf="fieldValidator('password')"
+      >La contraseña debe tener mas de 6 caracteres!</span
+    >
   </div>
   <div class="mt-4">
     <button
       class="btn btn-dark w-100 fw-bold"
-      type="button"
-      (click)="login(email.value, password.value)"
+      type="submit"
+      [disabled]="singIng.invalid"
     >
       <i class="bi bi-box-arrow-in-right"></i> {{ " " }}Iniciar sesion
     </button>

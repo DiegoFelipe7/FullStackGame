@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/service/auth.service';
 
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-sing-in',
   templateUrl: './sing-in.component.html',
@@ -10,10 +11,25 @@ import Swal from 'sweetalert2';
 })
 export class SingInComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
+
 
   ngOnInit(): void {
   }
+
+  singIng: FormGroup = this.fb.group({
+    email: ["", [Validators.required, Validators.email]],
+    password: ["", [Validators.required, Validators.minLength(6)]]
+  })
+
+
+  fieldValidator(fiel: string) {
+    return this.singIng.controls?.[fiel].errors && this.singIng.controls?.[fiel].touched
+  }
+
+
+
+
 
   /**
    * Metodo para inicio de sesion por medio de formulario
