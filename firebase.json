@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "./dist/full-stack-game",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

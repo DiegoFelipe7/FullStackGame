@@ -1,7 +1,7 @@
 //angular
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { HttpClientModule } from '@angular/common/http';
 //
 import { AngularFireModule } from '@angular/fire/compat';
