@@ -4,6 +4,8 @@ export interface Game {
     players: Player[];
     idPlayer: null;
     round: Round;
+    begined:Boolean;
+    creation:any
 }
 
 export interface Board {

@@ -1,12 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
-import {
-  hola,
-  Game,
-  Player,
-  CardInGame,
-} from 'src/app/interface/Prueba';
+import { hola, Game, Player, CardInGame } from 'src/app/interface/Prueba';
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 
@@ -22,8 +17,9 @@ export class GameBoardComponent implements OnInit {
   betIsViewed: boolean = true;
   count: number = 0;
   suscribcion!: Subscription;
-  img: string = '../../../../../assets/img/game/vacio.png';
   cardWinner!: any;
+  dateCreation!: Date;
+  img: string = '../../../../../assets/img/game/vacio.png';
   constructor(
     private gameService: GameService,
     private router: ActivatedRoute
@@ -45,6 +41,9 @@ export class GameBoardComponent implements OnInit {
     this.gameService.getGameById(idReceipt).subscribe((res) => {
       this.game.push(res);
       this.updateCards(res);
+      this.dateCreation = new Date(res.creation)
+      console.log((Date.now() - this.dateCreation.getTime()) / 1000 / 60)
+      this.startGame(res);
     });
   }
   getCardsPlayer(): void { }
@@ -61,7 +60,7 @@ export class GameBoardComponent implements OnInit {
 
     if (beted) {
       this.betIsViewed = false;
-      Swal.fire("Ya apostaste en esta ronda, no puedes apostar nuevamente")
+      Swal.fire('Ya apostaste en esta ronda, no puedes apostar nuevamente');
     } else {
       this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
         this.game[0] = res;
@@ -106,6 +105,7 @@ export class GameBoardComponent implements OnInit {
     );
     console.log(viewed);
     if (viewed) {
+      this.showWinnerCard();
       this.gameService.winnerRound(res.id).subscribe((res) => {
         this.updateCards(res);
         this.verifyPlayersLosed(res);
@@ -117,7 +117,11 @@ export class GameBoardComponent implements OnInit {
   verifyPlayersLosed(res: Game) {
     console.log(res);
     this.gameService.verifyPlayersLosed(res.id).subscribe((res) => {
-      //  if(this.game[0].players.length>res.players.length){
+      setTimeout(() => {
+        res.players.length == 1
+          ? Swal.fire(`El ganador de la partida es: ${res.players[0].email}`)
+          : null;
+      }, 2500);
       this.updateCards(res);
       console.log(res);
       //}
@@ -127,14 +131,11 @@ export class GameBoardComponent implements OnInit {
   showWinnerCard(): void {
     let scoreCaptured = 0;
 
-
-    this.cardsBoard[0].forEach((element: { card: any; }) => {
-
+    this.cardsBoard[0].forEach((element: { card: any }) => {
       if (element.card.power > scoreCaptured) {
         scoreCaptured = element.card.power;
-        this.cardWinner = element
+        this.cardWinner = element;
       }
-
     });
 
     Swal.fire({
@@ -143,7 +144,24 @@ export class GameBoardComponent implements OnInit {
       imageHeight: 400,
       imageWidth: 300,
       text: `Power: ${this.cardWinner.card.power} `,
-      imageAlt: 'Error cargando la imagen'
-    })
+      imageAlt: 'Error cargando la imagen',
+    });
+  }
+
+  surrenderPlayer(res: Game): void {
+    this.gameService
+      .surrenderPlayer(res.id, localStorage.getItem('id')!)
+      .subscribe((res) => {
+        console.log(res);
+        this.updateCards(res);
+      });
+  }
+
+  startGame(res: Game) {
+    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 1.5 && !res.begined && res.players.length >= 2) {
+      this.gameService.startGame(res.id).subscribe(res => {
+        this.updateCards(res)
+      })
+    }
   }
 }

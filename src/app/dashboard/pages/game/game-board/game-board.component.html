@@ -18,10 +18,14 @@
     </div>
   </div>
   <div class="col-9 marvel" style="height: 820px">
+    <div>
+      <button type="button" class="btn btn-danger w-25 p-2">Danger</button>
+    </div>
     <div
       class="row align-content-center scroll"
       *ngFor="let cardIngame of cardsBoard"
     >
+
       <div class="col-4" *ngFor="let card of cardIngame">
         <div class="card bg-dark shadow mt-2 w-75" style="width: 10rem">
           <h4 class="text-center text-white fw-bold" *ngIf="card.viewed">
