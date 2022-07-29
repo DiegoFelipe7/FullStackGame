@@ -8,7 +8,9 @@
       class="text-center mt-2"
       *ngFor="let players of gam.players; let indice = index"
     >
-      <p class="fw-bold fs-5">{{ gam.players[indice].email.slice(0, 6) }}</p>
+      <p class="fw-bold fs-5">
+        {{ gam.players[indice].name.slice(0, 6) | titlecase }}
+      </p>
       <img
         src="../../../../../assets/img/game/{{ indice + 1 }}.png"
         class="rounded mx-auto d-block bg-danger rounded-5"
@@ -17,15 +19,11 @@
       />
     </div>
   </div>
-  <div class="col-9 marvel" style="height: 820px">
-    <div>
-      <button type="button" class="btn btn-danger w-25 p-2">Danger</button>
-    </div>
+  <div class="col-9" style="height: 820px">
     <div
-      class="row align-content-center scroll"
+      class="row align-content-center scroll marvel"
       *ngFor="let cardIngame of cardsBoard"
     >
-
       <div class="col-4" *ngFor="let card of cardIngame">
         <div class="card bg-dark shadow mt-2 w-75" style="width: 10rem">
           <h4 class="text-center text-white fw-bold" *ngIf="card.viewed">
@@ -42,6 +40,16 @@
             />
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row p-2 justify-content-end" *ngFor="let game of game">
+      <div class="col-6">
+        <button
+          class="btn btn-danger text-center fw-bold fs-5"
+          (click)="surrenderPlayer(game)"
+        >
+          <i class="bi bi-box-arrow-left"></i> Retirarse
+        </button>
       </div>
     </div>
   </div>

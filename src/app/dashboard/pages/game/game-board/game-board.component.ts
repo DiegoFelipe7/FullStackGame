@@ -54,7 +54,7 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    let beted: Boolean = this.cardsBoard[0].some(
+    let beted: Boolean = this.cardsBoard[0]?.some(
       (element: any) => element.playerId == playerId
     );
 
@@ -100,7 +100,7 @@ export class GameBoardComponent implements OnInit {
    * @param res 
    */
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard[0].some(
+    let viewed: Boolean = this.cardsBoard[0]?.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
     console.log(viewed);
@@ -110,6 +110,9 @@ export class GameBoardComponent implements OnInit {
         this.updateCards(res);
         this.verifyPlayersLosed(res);
       });
+      this.gameService.nextRound(res.id).subscribe(res => {
+        this.game.filter(game => game.id === res.id ? res : game)
+      })
     }
   }
 
@@ -119,7 +122,7 @@ export class GameBoardComponent implements OnInit {
     this.gameService.verifyPlayersLosed(res.id).subscribe((res) => {
       setTimeout(() => {
         res.players.length == 1
-          ? Swal.fire(`El ganador de la partida es: ${res.players[0].email}`)
+          ? Swal.fire(`El ganador de la partida es: ${res.players[0].name}`)
           : null;
       }, 2500);
       this.updateCards(res);
@@ -149,12 +152,24 @@ export class GameBoardComponent implements OnInit {
   }
 
   surrenderPlayer(res: Game): void {
-    this.gameService
-      .surrenderPlayer(res.id, localStorage.getItem('id')!)
-      .subscribe((res) => {
-        console.log(res);
-        this.updateCards(res);
-      });
+    Swal.fire({
+      title: '¿Estas Seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.gameService
+          .surrenderPlayer(res.id, localStorage.getItem('id')!)
+          .subscribe((res) => {
+            console.log(res);
+            this.updateCards(res);
+          });
+      }
+    })
+
   }
 
   startGame(res: Game) {

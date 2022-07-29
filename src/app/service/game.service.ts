@@ -65,18 +65,36 @@ export class GameService {
     return this.http.post<Game>(url, this.httpOptions);
   }
 
+  /**
+   * Metodo para determinar el ganador de la ronda
+   * @param gameId 
+   * @returns 
+   */
   winnerRound(gameId: string): Observable<Game> {
     const url = `${this.url}/selectroundwinner/${gameId}`
     return this.http.post<Game>(url, this.httpOptions)
   }
 
+  nextRound(gameId: string): Observable<Game> {
+    const url = `${this.url}/nextround/${gameId}`
+    return this.http.post<Game>(url, this.httpOptions);
+  }
+
+
+
   verifyPlayersLosed(gameId: string): Observable<Game> {
     const url = `${this.url}/verifyplayerslosed/${gameId}`
     return this.http.post<Game>(url, this.httpOptions)
   }
-
+  /**
+   * Metodo para los 3 primeros usuarios con mayo puntaje
+   * @returns 
+   */
   getPlayers(): Observable<Player> {
     return this.http.get<Player>(`${this.urlplayers}/ranking`)
+  }
+  getPlayerId(id: string): Observable<Player> {
+    return this.http.get<Player>(`${this.urlplayers}/listplayer/${id}`)
   }
 
   surrenderPlayer(gameId: string, playerId: string): Observable<Game> {
