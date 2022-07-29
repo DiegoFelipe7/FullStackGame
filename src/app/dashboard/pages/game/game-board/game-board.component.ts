@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
 import { hola, Game, Player, CardInGame } from 'src/app/interface/Prueba';
+
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 
@@ -20,6 +21,7 @@ export class GameBoardComponent implements OnInit {
   cardWinner!: any;
   dateCreation!: Date;
   img: string = '../../../../../assets/img/game/vacio.png';
+  
   constructor(
     private gameService: GameService,
     private router: ActivatedRoute
@@ -61,6 +63,7 @@ export class GameBoardComponent implements OnInit {
     if (beted) {
       this.betIsViewed = false;
       Swal.fire('Ya apostaste en esta ronda, no puedes apostar nuevamente');
+      
     } else {
       this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
         this.game[0] = res;
@@ -148,15 +151,38 @@ export class GameBoardComponent implements OnInit {
     });
   }
 
-  surrenderPlayer(res: Game): void {
-    this.gameService
-      .surrenderPlayer(res.id, localStorage.getItem('id')!)
-      .subscribe((res) => {
-        console.log(res);
-        this.updateCards(res);
-      });
-  }
+  surrenderPlayer(res: Game):void{
+    Swal.fire({
+      title: 'Estás seguro de retirarte del juego?',
+      text: "No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo retirarme!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.gameService
+        .surrenderPlayer(res.id, localStorage.getItem('id')!)
+        .subscribe((res) => {
+          console.log(res);
+          this.updateCards(res);
+          
+        });
 
+        Swal.fire(
+          
+          'Te has retirado!',
+          'No puedes jugar, pero si observar.',
+          'success'
+         
+        ) 
+        setTimeout(() => {
+        window.location.reload()
+        }, 3000);
+      }
+    })
+  }
   startGame(res: Game) {
     if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 1.5 && !res.begined && res.players.length >= 2) {
       this.gameService.startGame(res.id).subscribe(res => {
@@ -165,3 +191,6 @@ export class GameBoardComponent implements OnInit {
     }
   }
 }
+
+
+  
