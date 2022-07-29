@@ -54,7 +54,7 @@ export class GameBoardComponent implements OnInit {
    */
   betCard(cardId: string, playerId: string): void {
     const idReceipt = this.router.snapshot.params['id'];
-    let beted: Boolean = this.cardsBoard[0].some(
+    let beted: Boolean = this.cardsBoard[0]?.some(
       (element: any) => element.playerId == playerId
     );
 
@@ -76,7 +76,7 @@ export class GameBoardComponent implements OnInit {
    */
 
   updateCards(res: Game): void {
-    res.players?.filter((player) =>
+    res?.players?.filter((player) =>
       player.playerId === localStorage.getItem('id')
         ? (this.cardsPlayer[0] = player)
         : null
@@ -97,10 +97,10 @@ export class GameBoardComponent implements OnInit {
   }
   /**
    * Metodo para determinar el ganador de la ronda y cambio de estado de cartas en el board
-   * @param res 
+   * @param res
    */
   selectRoundWinner(res: Game) {
-    let viewed: Boolean = this.cardsBoard[0].some(
+    let viewed: Boolean = this.cardsBoard[0]?.some(
       (element: { viewed: boolean }) => element.viewed === true
     );
     console.log(viewed);
