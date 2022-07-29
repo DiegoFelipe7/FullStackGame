@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { elementAt, Subscription } from 'rxjs';
 import { hola, Game, Player, CardInGame } from 'src/app/interface/Prueba';
+
 import { GameService } from 'src/app/service/game.service';
 import Swal from 'sweetalert2';
 
@@ -20,6 +21,7 @@ export class GameBoardComponent implements OnInit {
   cardWinner!: any;
   dateCreation!: Date;
   img: string = '../../../../../assets/img/game/vacio.png';
+
   constructor(
     private gameService: GameService,
     private router: ActivatedRoute
@@ -61,6 +63,7 @@ export class GameBoardComponent implements OnInit {
     if (beted) {
       this.betIsViewed = false;
       Swal.fire('Ya apostaste en esta ronda, no puedes apostar nuevamente');
+
     } else {
       this.gameService.betCard(cardId, playerId, idReceipt).subscribe((res) => {
         this.game[0] = res;
@@ -76,7 +79,7 @@ export class GameBoardComponent implements OnInit {
    */
 
   updateCards(res: Game): void {
-    res.players?.filter((player) =>
+    res?.players?.filter((player) =>
       player.playerId === localStorage.getItem('id')
         ? (this.cardsPlayer[0] = player)
         : null
@@ -97,7 +100,7 @@ export class GameBoardComponent implements OnInit {
   }
   /**
    * Metodo para determinar el ganador de la ronda y cambio de estado de cartas en el board
-   * @param res 
+   * @param res
    */
   selectRoundWinner(res: Game) {
     let viewed: Boolean = this.cardsBoard[0]?.some(
@@ -149,16 +152,20 @@ export class GameBoardComponent implements OnInit {
       text: `Power: ${this.cardWinner.card.power} `,
       imageAlt: 'Error cargando la imagen',
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   surrenderPlayer(res: Game): void {
     Swal.fire({
-      title: '¿Estas Seguro?',
+      title: 'Estás seguro de retirarte del juego?',
+      text: "No podrás revertir esta acción!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si!'
+      confirmButtonText: 'Si, deseo retirarme!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.gameService
@@ -166,17 +173,31 @@ export class GameBoardComponent implements OnInit {
           .subscribe((res) => {
             console.log(res);
             this.updateCards(res);
+            this.verifyPlayersLosed(res)
           });
+
+        Swal.fire(
+
+          'Te has retirado!',
+          'No puedes jugar, pero si observar.',
+          'success'
+
+        )
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 3000);
       }
     })
-
   }
-
   startGame(res: Game) {
-    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 1.5 && !res.begined && res.players.length >= 2) {
+    if (((Date.now() - this.dateCreation.getTime()) / 1000 / 60) >= 0.3 && !res.begined && res.players.length >= 2) {
       this.gameService.startGame(res.id).subscribe(res => {
         this.updateCards(res)
       })
     }
   }
 }
+
+
+

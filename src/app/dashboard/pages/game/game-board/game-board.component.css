@@ -6,3 +6,8 @@
   border: 1px solid #ddd;
   overflow-y: scroll;
 }
+
+#buttonRendirse:hover{
+  background-color: rgb(249, 80, 80);
+  color: #ddd;
+}
